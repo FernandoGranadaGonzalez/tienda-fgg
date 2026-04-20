@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{fragments :: head_comun}"></head>
+    <body>
+        <div th:replace="~{fragments :: menu_navegacion}"></div>
+        
+        <main style="max-width: 800px; margin: 20px auto; padding: 20px; border: 1px solid #eee;">
+        
+            <div th:if="${categoria != null}">
+                <h1 th:text="${categoria.nombre}">Nombre del Género</h1>
+            
+                <div style="display: flex; gap: 30px; align-items: start;">
+                    <div style="flex: 1;">
+                        <img th:if="${categoria.nombreImagen != null}"
+                             th:src="@{/images/{img}(img=${categoria.nombreImagen})}"
+                             alt="Imagen de categoría" style="width: 100%; border-radius: 8px;">
+                    
+                        <img th:if="${categoria.nombreImagen == null}"
+                             th:src="@{/images/no-image.png}"
+                             alt="Sin imagen" style="width: 100%; border-radius: 8px; opacity: 0.7;">
+                    </div>
+                
+                    <div style="flex: 2;">
+                        <h3>Descripción Detallada</h3>
+                        <p th:text="${categoria.descripcion}">Aquí va la descripción del género...</p>
+                    
+                        <p><strong>ID de Categoría:</strong> <span th:text="${categoria.id}">0</span></p>
+                    
+                        <br>
+                        <a th:href="@{/categorias}" style="display: inline-block; padding: 10px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">
+                            &larr; Volver al listado
+                        </a>
+                    </div>
+                </div>
+            </div>
+        
+            <div th:if="${categoria == null}">
+                <h2>Vaya, esta categoría no existe.</h2>
+                <a th:href="@{/categorias}">Volver al listado</a>
+            </div>
+        
+        </main>
+    
+        <div th:replace="~{fragments :: pie_pagina}"></div>
+    </body>
+</html>
