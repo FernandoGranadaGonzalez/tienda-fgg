@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{fragments :: head_comun}"></head>
+    <body>
+        <div th:replace="~{fragments :: menu_navegacion}"></div>
+        
+        <h1>Géneros de Videojuegos</h1>
+        
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <div th:each="category : ${listaCategorias}" style="border: 1px solid #ccc; padding: 10px; width: 200px;">
+        
+                <img th:if="${category.nombreImagen != null}"
+                     th:src="@{/images/{img}(img=${category.nombreImagen})}"
+                     style="width: 100%; height: 150px; object-fit: cover;">
+        
+                <img th:if="${category.nombreImagen == null}"
+                     th:src="@{/images/no-image.png}"
+                     style="width: 100%; height: 150px; object-fit: cover;">
+        
+                <h3 th:text="${category.nombre}">Nombre Categoría</h3>
+                <p th:text="${category.descripcion}">Descripción corta...</p>
+        
+                <a th:href="@{/categorias/{id}(id=${category.id})}">Ver más detalles</a>
+            </div>
+        </div>
+        
+        <div th:replace="~{fragments :: pie_pagina}"></div>
+    </body>
+</html>

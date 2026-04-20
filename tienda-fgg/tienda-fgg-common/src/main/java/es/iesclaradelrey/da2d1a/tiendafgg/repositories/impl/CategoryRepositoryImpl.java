@@ -18,28 +18,28 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 .id(1L)
                 .nombre("Aventura")
                 .descripcion("Juegos de aventuras")
-                .nombreImagen("https://img.icons8.com/papercut/1200/adventure.jpg")
+                .nombreImagen("aventura.jpg")
                 .build());
 
         listaCategorias.add(Category.builder()
                 .id(2L)
                 .nombre("Shooter")
                 .descripcion("Juegos de disparos")
-                .nombreImagen("https://cdn-icons-png.flaticon.com/512/1620/1620460.png")
+                .nombreImagen("shooter.png")
                 .build());
 
         listaCategorias.add(Category.builder()
                 .id(3L)
                 .nombre("Estrategia")
                 .descripcion("Juegos de estrategia")
-                .nombreImagen("https://cdn-icons-png.flaticon.com/512/9968/9968200.png")
+                .nombreImagen("estrategia.png")
                 .build());
 
         listaCategorias.add(Category.builder()
                 .id(4L)
                 .nombre("RPG")
                 .descripcion("Juegos de rol por turnos.")
-                .nombreImagen("https://cdn-icons-png.flaticon.com/512/2619/2619285.png")
+                .nombreImagen("rpg.png")
                 .build());
     }
 
