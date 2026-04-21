@@ -11,7 +11,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 @Repository
-public class GameRepositoryImpl {
+public class GameRepositoryImpl implements GameRepository{
 
     private final List<Game> listaJuegos = new ArrayList<>();
 
