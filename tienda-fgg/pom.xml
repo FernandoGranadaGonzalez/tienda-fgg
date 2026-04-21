@@ -20,12 +20,20 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <datafaker.version>2.2.2</datafaker.version>
     </properties>
 
     <modules>
         <module>tienda-fgg-common</module>
         <module>tienda-fgg-web</module>
-        <module>tienda-fgg-common</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.datafaker</groupId>
+            <artifactId>datafaker</artifactId>
+            <version>${datafaker.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
