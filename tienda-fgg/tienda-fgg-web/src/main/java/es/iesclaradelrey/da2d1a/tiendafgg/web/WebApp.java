@@ -1,9 +1,12 @@
-package es.iesclaradelrey.da2d1a.tiendafgg.tiendafgg.web;
+package es.iesclaradelrey.da2d1a.tiendafgg.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = "es.iesclaradelrey.da2d1a.tiendafgg")
+@SpringBootApplication(scanBasePackages = {
+        "es.iesclaradelrey.da2d1a.tiendafgg.web",
+        "es.iesclaradelrey.da2d1a.tiendafgg.common"
+})
 public class WebApp {
     public static void main(String[] args) {
         SpringApplication.run(WebApp.class, args);

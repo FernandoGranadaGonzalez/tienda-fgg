@@ -1,7 +1,7 @@
-package es.iesclaradelrey.da2d1a.tiendafgg.tiendafgg.web.controllers;
+package es.iesclaradelrey.da2d1a.tiendafgg.web.controllers;
 
-import es.iesclaradelrey.da2d1a.tiendafgg.services.CategoryService;
-import es.iesclaradelrey.da2d1a.tiendafgg.services.GameService;
+import es.iesclaradelrey.da2d1a.tiendafgg.common.services.CategoryService;
+import es.iesclaradelrey.da2d1a.tiendafgg.common.services.GameService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ public class CategoryController {
 
     @GetMapping({"", "/"})
     public String listado(Model modelo) {
-        modelo.addAttribute("listaCategorias", servicioCategorias.obtenerTodas());
+        modelo.addAttribute("listaCategorias", servicioCategorias.obtenerTodos());
         return "categories/list";
     }
 

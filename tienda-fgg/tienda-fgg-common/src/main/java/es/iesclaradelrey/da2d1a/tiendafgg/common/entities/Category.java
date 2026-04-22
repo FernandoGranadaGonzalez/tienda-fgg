@@ -1,4 +1,4 @@
-package es.iesclaradelrey.da2d1a.tiendafgg.entities;
+package es.iesclaradelrey.da2d1a.tiendafgg.common.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,5 +13,5 @@ public class Category {
     private Long id;
     private String nombre;
     private String descripcion;
-    private String nombreImagen;
+    private String imagen;
 }

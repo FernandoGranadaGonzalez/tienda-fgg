@@ -1,7 +1,8 @@
-package es.iesclaradelrey.da2d1a.tiendafgg.repositories.impl;
+package es.iesclaradelrey.da2d1a.tiendafgg.common.repositories.impl;
 
-import es.iesclaradelrey.da2d1a.tiendafgg.entities.Game;
-import es.iesclaradelrey.da2d1a.tiendafgg.repositories.GenericRepository;
+import es.iesclaradelrey.da2d1a.tiendafgg.common.entities.Game;
+import es.iesclaradelrey.da2d1a.tiendafgg.common.repositories.GameRepository;
+import es.iesclaradelrey.da2d1a.tiendafgg.common.repositories.GenericRepository;
 import net.datafaker.Faker;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +12,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 @Repository
-public class GameRepositoryImpl implements GameRepository{
+public class GameRepositoryImpl implements GameRepository {
 
     private final List<Game> listaJuegos = new ArrayList<>();
 

@@ -1,8 +1,8 @@
-package es.iesclaradelrey.da2d1a.tiendafgg.services.impl;
+package es.iesclaradelrey.da2d1a.tiendafgg.common.services.impl;
 
-import es.iesclaradelrey.da2d1a.tiendafgg.entities.Game;
-import es.iesclaradelrey.da2d1a.tiendafgg.repositories.GameRepository;
-import es.iesclaradelrey.da2d1a.tiendafgg.services.GameService;
+import es.iesclaradelrey.da2d1a.tiendafgg.common.entities.Game;
+import es.iesclaradelrey.da2d1a.tiendafgg.common.repositories.GameRepository;
+import es.iesclaradelrey.da2d1a.tiendafgg.common.services.GameService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package es.iesclaradelrey.da2d1a.tiendafgg.repositories;
+package es.iesclaradelrey.da2d1a.tiendafgg.common.repositories;
 
-import es.iesclaradelrey.da2d1a.tiendafgg.entities.Game;
+import es.iesclaradelrey.da2d1a.tiendafgg.common.entities.Game;
 import java.util.List;
 
 public interface GameRepository {

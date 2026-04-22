@@ -1,4 +1,4 @@
-package es.iesclaradelrey.da2d1a.tiendafgg.entities;
+package es.iesclaradelrey.da2d1a.tiendafgg.common.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
