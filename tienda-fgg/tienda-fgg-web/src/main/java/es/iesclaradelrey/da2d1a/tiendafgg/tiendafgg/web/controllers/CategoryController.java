@@ -1,6 +1,7 @@
 package es.iesclaradelrey.da2d1a.tiendafgg.tiendafgg.web.controllers;
 
 import es.iesclaradelrey.da2d1a.tiendafgg.services.CategoryService;
+import es.iesclaradelrey.da2d1a.tiendafgg.services.GameService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CategoryController {
 
     private final CategoryService servicioCategorias;
+    private final GameService servicioJuegos;
 
-    public CategoryController(CategoryService servicioCategorias) {
+    public CategoryController(CategoryService servicioCategorias, GameService servicioJuegos) {
         this.servicioCategorias = servicioCategorias;
+        this.servicioJuegos = servicioJuegos;
     }
 
     @GetMapping({"", "/"})
@@ -25,7 +28,10 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     public String detalle(@PathVariable Long id, Model modelo) {
-        servicioCategorias.buscarPorId(id).ifPresent(category -> modelo.addAttribute("categoria", category));
+        servicioCategorias.buscarPorId(id).ifPresent(cat -> {
+            modelo.addAttribute("categoria", cat);
+            modelo.addAttribute("listaJuegos", servicioJuegos.obtenerJuegosDeCategoria(id));
+        });
         return "categories/detail";
     }
 }
