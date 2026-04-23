@@ -4,27 +4,29 @@
     <body>
         <div th:replace="~{fragments :: menu_navegacion}"></div>
 
-        <h1>Géneros de Videojuegos</h1>
+        <main class="container">
+            <h1>Géneros de Videojuegos</h1>
 
-        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-            <div th:each="category : ${listaCategorias}" style="border: 1px solid #ccc; padding: 10px; width: 200px;">
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <div th:each="category : ${listaCategorias}" style="border: 1px solid #ccc; padding: 10px; width: 200px;">
 
-                <img th:if="${category.imagen != null}"
-                     th:src="@{/imagenes/categorias/{img}(img=${category.imagen})}"
-                     th:alt="'Imagen de ' + ${category.nombre}"
-                     style="width: 100%; height: 150px; object-fit: cover;">
+                    <img th:if="${category.imagen != null}"
+                         th:src="@{/imagenes/categorias/{img}(img=${category.imagen})}"
+                         th:alt="'Imagen de ' + ${category.nombre}"
+                         style="width: 100%; height: 150px; object-fit: cover;">
 
-                <img th:if="${category.imagen == null}"
-                     th:src="@{/imagenes/categorias/no-image.png}"
-                     th:alt="'Imagen genérica para ' + ${category.nombre}"
-                     style="width: 100%; height: 150px; object-fit: cover;">
+                    <img th:if="${category.imagen == null}"
+                         th:src="@{/imagenes/categorias/no-image.png}"
+                         th:alt="'Imagen genérica para ' + ${category.nombre}"
+                         style="width: 100%; height: 150px; object-fit: cover;">
 
-                <h3 th:text="${category.nombre}">Nombre Categoría</h3>
-                <p th:text="${category.descripcion}">Descripción corta...</p>
+                    <h3 th:text="${category.nombre}">Nombre Categoría</h3>
+                    <p th:text="${category.descripcion}">Descripción corta...</p>
 
-                <a th:href="@{/categorias/{id}(id=${category.id})}">Ver más detalles</a>
+                    <a th:href="@{/categorias/{id}(id=${category.id})}" class="btn">Ver más detalles</a>
+                </div>
             </div>
-        </div>
+        </main>
 
         <div th:replace="~{fragments :: pie_pagina}"></div>
     </body>

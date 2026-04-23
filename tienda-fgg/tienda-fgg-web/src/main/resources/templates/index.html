@@ -4,11 +4,13 @@
     <body>
         <div th:replace="~{fragments :: menu_navegacion}"></div>
 
-        <h1>Bienvenido a la Tienda de Videojuegos FGG</h1>
-        <p>Explora los mejores géneros y encuentra tu próximo reto.</p>
+        <main class="container">
+            <h1>Bienvenido a la Tienda de Videojuegos FGG</h1>
+            <p>Explora los mejores géneros y encuentra tu próximo reto.</p>
 
-        <a th:href="@{/categorias}">Ver todos los géneros</a>
-        
+            <a th:href="@{/categorias}" class="btn">Ver todos los géneros</a>
+        </main>
+
         <div th:replace="~{fragments :: pie_pagina}"></div>
     </body>
 </html>

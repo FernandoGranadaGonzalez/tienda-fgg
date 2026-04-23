@@ -11,7 +11,7 @@
                 <section class="category-detail">
                     <div class="category-img">
                         <img th:if="${categoria.imagen != null}"
-                             th:src="@{/imagenes/categorias/{img}(img=${categoria.imagen})}"
+                             th:src="@{/imagenes/categorias/{img}(img=${category.imagen})}"
                              th:alt="'Imagen de la categoría ' + ${categoria.nombre}">
 
                         <img th:if="${categoria.imagen == null}"
