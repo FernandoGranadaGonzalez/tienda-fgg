@@ -11,10 +11,12 @@
 
                 <img th:if="${category.imagen != null}"
                      th:src="@{/imagenes/categorias/{img}(img=${category.imagen})}"
+                     th:alt="'Imagen de ' + ${category.nombre}"
                      style="width: 100%; height: 150px; object-fit: cover;">
 
                 <img th:if="${category.imagen == null}"
                      th:src="@{/imagenes/categorias/no-image.png}"
+                     th:alt="'Imagen genérica para ' + ${category.nombre}"
                      style="width: 100%; height: 150px; object-fit: cover;">
 
                 <h3 th:text="${category.nombre}">Nombre Categoría</h3>
