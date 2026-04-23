@@ -10,11 +10,11 @@
 
                 <section class="category-detail">
                     <div class="category-img">
-                        <img th:if="${categoria.nombreImagen != null}"
-                             th:src="@{/images/{img}(img=${categoria.nombreImagen})}" alt="Imagen">
+                        <img th:if="${categoria.imagen != null}"
+                             th:src="@{/imagenes/categorias/{img}(img=${categoria.imagen})}" alt="Imagen">
 
-                        <img th:if="${categoria.nombreImagen == null}"
-                             th:src="@{/images/no-image.png}" class="placeholder" alt="Sin imagen">
+                        <img th:if="${categoria.imagen == null}"
+                             th:src="@{/imagenes/categorias/no-image.png}" class="placeholder" alt="Sin imagen">
                     </div>
 
                     <div class="category-info">
