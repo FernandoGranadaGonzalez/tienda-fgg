@@ -21,6 +21,11 @@ public class CategoryController {
         this.gameService = gameService;
     }
 
+    @ModelAttribute("todasLasCategorias")
+    public List<Category> getTodasLasCategorias() {
+        return categoryService.obtenerTodos();
+    }
+
     @GetMapping
     public String list(Model model) {
         model.addAttribute("categorias", categoryService.obtenerTodos());
