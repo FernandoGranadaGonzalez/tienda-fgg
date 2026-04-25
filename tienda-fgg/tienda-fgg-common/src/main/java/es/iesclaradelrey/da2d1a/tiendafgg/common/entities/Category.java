@@ -14,4 +14,11 @@ public class Category {
     private String nombre;
     private String descripcion;
     private String imagen;
+
+    public Category(Long id, String nombre, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.imagen = "default-category.jpg";
+    }
 }

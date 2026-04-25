@@ -1,37 +1,43 @@
 package es.iesclaradelrey.da2d1a.tiendafgg.web.controllers;
 
+import es.iesclaradelrey.da2d1a.tiendafgg.common.entities.Category;
+import es.iesclaradelrey.da2d1a.tiendafgg.common.entities.Game;
 import es.iesclaradelrey.da2d1a.tiendafgg.common.services.CategoryService;
 import es.iesclaradelrey.da2d1a.tiendafgg.common.services.GameService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @Controller
 @RequestMapping("/categorias")
 public class CategoryController {
 
-    private final CategoryService servicioCategorias;
-    private final GameService servicioJuegos;
+    private final CategoryService categoryService;
+    private final GameService gameService;
 
-    public CategoryController(CategoryService servicioCategorias, GameService servicioJuegos) {
-        this.servicioCategorias = servicioCategorias;
-        this.servicioJuegos = servicioJuegos;
+    public CategoryController(CategoryService categoryService, GameService gameService) {
+        this.categoryService = categoryService;
+        this.gameService = gameService;
     }
 
-    @GetMapping({"", "/"})
-    public String listado(Model modelo) {
-        modelo.addAttribute("listaCategorias", servicioCategorias.obtenerTodos());
+    @GetMapping
+    public String list(Model model) {
+        model.addAttribute("categorias", categoryService.obtenerTodos());
         return "categories/list";
     }
 
     @GetMapping("/{id}")
-    public String detalle(@PathVariable Long id, Model modelo) {
-        servicioCategorias.buscarPorId(id).ifPresent(cat -> {
-            modelo.addAttribute("categoria", cat);
-            modelo.addAttribute("listaJuegos", servicioJuegos.obtenerJuegosDeCategoria(id));
-        });
+    public String detail(@PathVariable Long id, Model model) {
+        model.addAttribute("categoria", categoryService.buscarPorId(id).orElse(null));
+        model.addAttribute("listaJuegos", gameService.obtenerJuegosDeCategoria(id));
         return "categories/detail";
+    }
+
+    @GetMapping("/buscar")
+    public String buscar(@RequestParam(name = "query", required = false) String query, Model model) {
+        model.addAttribute("listaJuegos", gameService.buscarPorNombre(query));
+        model.addAttribute("query", query);
+        return "categories/search-results";
     }
 }

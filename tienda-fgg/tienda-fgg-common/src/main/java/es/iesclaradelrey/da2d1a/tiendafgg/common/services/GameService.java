@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface GameService {
     List<Game> obtenerJuegosDeCategoria(Long categoriaId);
+    List<Game> buscarPorNombre(String query);
 }

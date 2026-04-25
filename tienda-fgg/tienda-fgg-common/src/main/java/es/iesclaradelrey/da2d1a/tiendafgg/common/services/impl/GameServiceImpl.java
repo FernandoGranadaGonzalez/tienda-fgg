@@ -19,4 +19,9 @@ public class GameServiceImpl implements GameService {
     public List<Game> obtenerJuegosDeCategoria(Long categoriaId) {
         return repositorioJuegos.buscarPorCategoria(categoriaId);
     }
+
+    @Override
+    public List<Game> buscarPorNombre(String query) {
+        return repositorioJuegos.buscarPorNombre(query);
+    }
 }

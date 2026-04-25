@@ -6,4 +6,5 @@ import java.util.List;
 public interface GameRepository {
     List<Game> obtenerTodos();
     List<Game> buscarPorCategoria(Long categoriaId);
+    List<Game> buscarPorNombre(String query);
 }

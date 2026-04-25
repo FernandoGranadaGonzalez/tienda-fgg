@@ -15,4 +15,7 @@ public class Game {
     private String descripcion;
     private Double precio;
     private Long categoriaId;
+
+    @Builder.Default
+    private String imagen = "no-image.jpg";
 }
