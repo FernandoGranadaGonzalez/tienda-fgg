@@ -1,9 +1,9 @@
 package es.iesclaradelrey.da2d1a.tiendafgg.common.repositories.impl;
 
-import es.iesclaradelrey.da2d1a.tiendafgg.common.repositories.GenericRepository;
+import es.iesclaradelrey.da2d1a.tiendafgg.common.repositories.GenericoRepository;
 import java.util.*;
 
-public abstract class GenericRepositoryImpl<T, K> implements GenericRepository<T, K> {
+public abstract class GenericoRepositoryImpl<T, K> implements GenericoRepository<T, K> {
     protected Map<K, T> entidades = new HashMap<>();
 
     @Override

@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Category {
+public class Categoria {
     private Long id;
     private String nombre;
     private String descripcion;
     private String imagen;
 
-    public Category(Long id, String nombre, String descripcion) {
+    public Categoria(Long id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;

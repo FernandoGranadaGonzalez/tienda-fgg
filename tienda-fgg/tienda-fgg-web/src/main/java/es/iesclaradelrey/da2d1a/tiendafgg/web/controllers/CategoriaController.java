@@ -1,9 +1,9 @@
 package es.iesclaradelrey.da2d1a.tiendafgg.web.controllers;
 
-import es.iesclaradelrey.da2d1a.tiendafgg.common.entities.Category;
-import es.iesclaradelrey.da2d1a.tiendafgg.common.entities.Game;
-import es.iesclaradelrey.da2d1a.tiendafgg.common.services.CategoryService;
-import es.iesclaradelrey.da2d1a.tiendafgg.common.services.GameService;
+import es.iesclaradelrey.da2d1a.tiendafgg.common.entities.Categoria;
+import es.iesclaradelrey.da2d1a.tiendafgg.common.entities.Videojuego;
+import es.iesclaradelrey.da2d1a.tiendafgg.common.services.CategoriaService;
+import es.iesclaradelrey.da2d1a.tiendafgg.common.services.VideojuegoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,18 +11,18 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/categorias")
-public class CategoryController {
+public class CategoriaController {
 
-    private final CategoryService categoryService;
-    private final GameService gameService;
+    private final CategoriaService categoryService;
+    private final VideojuegoService gameService;
 
-    public CategoryController(CategoryService categoryService, GameService gameService) {
+    public CategoriaController(CategoriaService categoryService, VideojuegoService gameService) {
         this.categoryService = categoryService;
         this.gameService = gameService;
     }
 
     @ModelAttribute("todasLasCategorias")
-    public List<Category> getTodasLasCategorias() {
+    public List<Categoria> getTodasLasCategorias() {
         return categoryService.obtenerTodos();
     }
 

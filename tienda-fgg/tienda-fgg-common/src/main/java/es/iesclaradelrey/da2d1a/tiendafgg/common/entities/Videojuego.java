@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Game {
+public class Videojuego {
     private Long id;
     private String titulo;
     private String descripcion;
