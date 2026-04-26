@@ -3,35 +3,59 @@
     <head th:replace="~{fragments :: head_comun}"></head>
     <body>
         <div th:replace="~{fragments :: menu_navegacion}"></div>
-        
-        <main class="container">
-            <h1>Resultados de búsqueda</h1>
-            <p>Has buscado: "<span th:text="${query}"></span>"</p>
-        
-            <div th:if="${not #lists.isEmpty(listaJuegos)}" class="games-grid">
-                <div class="game-card" th:each="juego : ${listaJuegos}">
-                    <div class="card-img">
-                        <img th:src="@{/imagenes/portadas/{img}(img=${juego.imagen != null ? juego.imagen : 'default.jpg'})}"
-                             th:alt="${juego.titulo}">
-                    </div>
-                    <div class="card-content">
-                        <h3 th:text="${juego.titulo}">Título</h3>
-                        <p th:text="${juego.descripcion}">Descripción...</p>
-                        <div class="card-footer">
-                            <span class="price" th:text="${#numbers.formatDecimal(juego.precio, 1, 2) + ' €'}">0.00 €</span>
+
+        <main class="container section-spacing">
+            <header class="page-header">
+                <span class="badge-alt">BÚSQUEDA</span>
+                <h1>Resultados para "<span class="search-term" th:text="${query}">shadow</span>"</h1>
+                <p class="subtitle">
+                    <span th:text="${#lists.size(listaJuegos)}">1</span>
+                    <span th:text="${#lists.size(listaJuegos)} == 1 ? 'resultado encontrado' : 'resultados encontrados'">resultado encontrado</span>
+                </p>
+            </header>
+
+            <div class="catalog-layout">
+                <aside class="sidebar">
+                    <span class="sidebar-label">CATEGORÍAS</span>
+                    <nav class="sidebar-nav">
+                        <a th:each="cat : ${todasLasCategorias}"
+                           th:href="@{/categorias/{id}(id=${cat.id})}"
+                           th:text="${cat.nombre}">
+                            Nombre Categoría
+                        </a>
+                    </nav>
+                </aside>
+
+                <section class="games-catalog">
+                    <div th:if="${not #lists.isEmpty(listaJuegos)}" class="games-grid-detail">
+
+                        <div class="game-item-card" th:each="juego : ${listaJuegos}">
+                            <div class="game-item-img">
+                                <!--<span class="game-badge">BEST SELLER</span>-->
+
+                                <img th:src="@{/imagenes/portadas/{img}(img=${juego.imagen != null ? juego.imagen : 'default.jpg'})}"
+                                     th:alt="${juego.titulo}">
+                            </div>
+                            <div class="game-item-body">
+                                <h3 th:text="${juego.titulo}">Shadow Depths</h3>
+                                <div class="game-item-footer">
+                                    <div class="game-rating">
+                                        <span class="star-icon">★</span>
+                                        <span>4.8</span>
+                                    </div>
+                                    <span class="game-price" th:text="${#numbers.formatDecimal(juego.precio, 1, 2) + '€'}">49.99€</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    <div th:if="${#lists.isEmpty(listaJuegos)}" class="alert">
+                        <p>Lo sentimos, no hemos encontrado ningún juego con ese título.</p>
+                    </div>
+                </section>
             </div>
-        
-            <div th:if="${#lists.isEmpty(listaJuegos)}" class="alert">
-                <p>No se encontraron juegos con ese nombre.</p>
-            </div>
-        
-            <br>
-            <a th:href="@{/categorias}" class="btn-link">&larr; Volver al catálogo</a>
         </main>
-        
-        <div th:replace="~{fragments :: pie_pagina}"></div>
+
+        <footer th:replace="~{fragments :: pie_pagina}"></footer>
     </body>
 </html>

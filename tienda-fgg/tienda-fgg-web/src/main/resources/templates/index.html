@@ -3,14 +3,68 @@
     <head th:replace="~{fragments :: head_comun}"></head>
     <body>
         <div th:replace="~{fragments :: menu_navegacion}"></div>
+        <main>
+            <section class="hero">
+                <div class="hero-content container">
+                    <span class="badge">🎮 Tu tienda de videojuegos</span>
+                    <h1>Juega al <span>siguiente level 🆙</span></h1>
+                    <p>Los mejores videojuegos de todas las categorías. Aventura, disparos, estrategia y RPG — todo en un solo lugar.</p>
+                    <div class="hero-btns">
+                        <a th:href="@{/categorias}" class="btn-primary">Ver categorías ➔</a>
+                        <a href="/about-us.html" class="btn-secondary">Sobre FGG</a>
+                    </div>
+                </div>
+            </section>
 
-        <main class="container">
-            <h1>Bienvenido a la Tienda de Videojuegos FGG</h1>
-            <p>Explora los mejores géneros y encuentra tu próximo reto.</p>
+            <section class="search-stats container">
+                <div class="search-box-large">
+                    <h2>¿Qué quieres jugar hoy?</h2>
+                    <p>Busca entre cientos de títulos disponibles</p>
+                    <form th:action="@{/categorias/buscar}" method="get" class="big-search">
+                        <input type="text" name="query" placeholder="Nombre del juego, categoría...">
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>
 
-            <a th:href="@{/categorias}" class="btn">Ver todos los géneros</a>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-icon">⚡</span>
+                        <strong>30+</strong>
+                        <p>Títulos disponibles</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <strong>4.9 ★</strong>
+                        <p>Valoración media</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🛡️</span>
+                        <strong>100%</strong>
+                        <p>Compra segura</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="categories-preview container">
+                <div class="section-header">
+                    <div>
+                        <span class="sub">EXPLORA POR GÉNERO</span>
+                        <h2>Categorías</h2>
+                    </div>
+                    <a th:href="@{/categorias}" class="explore-link">Ver todas ➔</a>
+                </div>
+
+                <div class="category-cards">
+                    <div class="cat-card" th:each="cat : ${categoriasPreview}">
+                        <img th:src="@{/imagenes/categorias/{img}(img=${cat.imagen})}" alt="">
+                        <div class="cat-info">
+                            <h3 th:text="${cat.nombre}">Aventuras</h3>
+                            <p th:text="${cat.descripcion}">Explora mundos épicos sin límites</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
-
-        <div th:replace="~{fragments :: pie_pagina}"></div>
+        <footer th:replace="~{fragments :: pie_pagina}"></footer>
     </body>
 </html>

@@ -3,62 +3,51 @@
     <head th:replace="~{fragments :: head_comun}"></head>
     <body>
         <div th:replace="~{fragments :: menu_navegacion}"></div>
-        
-        <main class="container">
-            <div th:if="${categoria != null}">
-                <h1 th:text="${categoria.nombre}">Nombre</h1>
-        
-                <section class="category-detail">
-                    <div class="category-img">
-                        <img th:if="${categoria.imagen != null}"
-                             th:src="@{/imagenes/categorias/{img}(img=${categoria.imagen})}"
-                             th:alt="'Imagen de la categoría ' + ${categoria.nombre}">
-                        <img th:if="${categoria.imagen == null}"
-                             th:src="@{/imagenes/categorias/no-image.png}"
-                             class="placeholder"
-                             th:alt="'Imagen no disponible'">
-                    </div>
-        
-                    <div class="category-info">
-                        <h3>Descripción</h3>
-                        <p th:text="${categoria.descripcion}">Descripción...</p>
-                        <p><strong>ID:</strong> <span th:text="${categoria.id}">0</span></p>
-                    </div>
-                </section>
-        
-                <hr>
-        
-                <section class="games-section">
-                    <h2>Videojuegos disponibles</h2>
-        
-                    <div th:if="${not #lists.isEmpty(listaJuegos)}" class="games-grid">
-                        <div class="game-card" th:each="juego : ${listaJuegos}">
-                            <div class="card-img">
+
+        <main class="container section-spacing">
+            <header class="page-header" th:if="${categoria != null}">
+                <span class="badge-alt">CATÁLOGO</span>
+                <h1 th:text="${categoria.nombre}">Aventuras</h1>
+                <p class="subtitle" th:text="${categoria.descripcion}">Explora mundos épicos sin límites</p>
+            </header>
+
+            <div class="catalog-layout">
+                <aside class="sidebar">
+                    <span class="sidebar-label">CATEGORÍAS</span>
+                    <nav class="sidebar-nav">
+                        <a th:each="cat : ${todasLasCategorias}"
+                           th:href="@{/categorias/{id}(id=${cat.id})}"
+                           th:text="${cat.nombre}"
+                           th:classappend="${cat.id == categoria.id} ? 'active' : ''">
+                            Nombre Categoría
+                        </a>
+                    </nav>
+                </aside>
+
+                <section class="games-catalog">
+                    <div th:if="${not #lists.isEmpty(listaJuegos)}" class="games-grid-detail">
+                        <div class="game-item-card" th:each="juego : ${listaJuegos}">
+                            <div class="game-item-img">
                                 <img th:src="@{/imagenes/portadas/{img}(img=${juego.imagen != null ? juego.imagen : 'default.jpg'})}"
                                      th:alt="${juego.titulo}">
                             </div>
-                            <div class="card-content">
-                                <h3 th:text="${juego.titulo}">Título</h3>
-                                <p th:text="${juego.descripcion}">Descripción corta...</p>
-                                <div class="card-footer">
-                                    <span class="price" th:text="${#numbers.formatDecimal(juego.precio, 1, 2) + ' €'}">0.00 €</span>
+                            <div class="game-item-body">
+                                <h3 th:text="${juego.titulo}">Shadow Depths</h3>
+                                <div class="game-item-footer">
+                                    <div></div>
+                                    <span class="game-price" th:text="${#numbers.formatDecimal(juego.precio, 1, 2) + '€'}">49.99€</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-        
+
                     <div th:if="${#lists.isEmpty(listaJuegos)}" class="alert">
-                        <p>No hay juegos en esta categoría actualmente.</p>
+                        <p>Próximamente añadiremos títulos a esta categoría.</p>
                     </div>
                 </section>
-        
-                <br>
-                <a th:href="@{/categorias}" class="btn-link">&larr; Volver al listado</a>
             </div>
-        
-            <div th:if="${categoria == null}" class="error-box">...</div>
         </main>
-        
-        <div th:replace="~{fragments :: pie_pagina}"></div>
+
+        <footer th:replace="~{fragments :: pie_pagina}"></footer>
     </body>
 </html>

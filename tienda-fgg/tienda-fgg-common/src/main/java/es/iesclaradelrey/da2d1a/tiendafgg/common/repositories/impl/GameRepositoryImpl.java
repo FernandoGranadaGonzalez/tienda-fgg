@@ -35,11 +35,11 @@ public class GameRepositoryImpl implements GameRepository {
         listaJuegos.add(new Game(19L, "High on Life", "Shooter en primera persona con humor y armas parlantes en un mundo de ciencia ficción.", 39.99, 2L, "highonlife.jpg"));
         listaJuegos.add(new Game(20L, "Gears of War: Ultimate Edition", "Shooter en tercera persona con coberturas donde luchas contra hordas alienígenas en un mundo devastado.", 19.99, 2L, "gears.jpg"));
 
-        listaJuegos.add(new Game(21L, "Sid Meier's Civilization VI", "Juego de estrategia por turnos donde desarrollas una civilización desde la antigüedad hasta la era moderna.", 3.62, 3L, "civilizationivi.jpg"));
+        listaJuegos.add(new Game(21L, "Sid Meier's Civilization VI", "Juego de estrategia por turnos donde desarrollas una civilización desde la antigüedad hasta la era moderna.", 3.62, 3L, "civilizationvi.jpg"));
         listaJuegos.add(new Game(22L, "Age of Empires IV", "Estrategia en tiempo real donde construyes imperios históricos y gestionas recursos y ejércitos.", 19.97, 3L, "ageiv.png"));
         listaJuegos.add(new Game(23L, "XCOM 2", "Estrategia táctica por turnos donde lideras la resistencia contra una invasión alienígena.", 8.00, 3L, "xcom2.jpg"));
         listaJuegos.add(new Game(24L, "Imperialism II: The Age of Exploration", "Estrategia histórica centrada en colonización, comercio y expansión imperial.", 17.92, 3L, "imperialismii.webp"));
-        listaJuegos.add(new Game(25L, "Into the Breach", "Estrategia por turnos con combates tácticos en cuadrícula contra criaturas gigantes.", 48.24, 3L, "intobreach.jpg"));
+        listaJuegos.add(new Game(25L, "Into the Breach", "Estrategia por turnos con combates tácticos en cuadrícula contra criaturas gigantes.", 48.24, 3L, "intobreach.png"));
         listaJuegos.add(new Game(26L, "Panzer Corps 2", "Juego de estrategia militar centrado en batallas históricas con unidades detalladas.", 1.12, 3L, "panzercorps.jpg"));
         listaJuegos.add(new Game(27L, "Crusader Kings III", "Gran juego de estrategia donde gestionas una dinastía medieval mediante política, guerras y relaciones.", 29.99, 3L, "ckiii.jpg"));
         listaJuegos.add(new Game(28L, "Totally Accurate Battle Simulator", "Estrategia divertida basada en física donde creas ejércitos absurdos y los enfrentas.", 6.49, 3L, "tabs.avif"));
@@ -51,7 +51,7 @@ public class GameRepositoryImpl implements GameRepository {
         listaJuegos.add(new Game(33L, "Cyberpunk 2077", "RPG futurista en una ciudad abierta donde tus decisiones afectan la historia y el mundo.", 39.99, 4L, "cyberpunk.jpg"));
         listaJuegos.add(new Game(34L, "Dark Souls III", "RPG de acción desafiante con combates exigentes y ambientación oscura y misteriosa.", 29.99, 4L, "dsiii.jpg"));
         listaJuegos.add(new Game(35L, "Persona 5 Royal", "RPG japonés donde combinas vida estudiantil con combates por turnos en mundos cognitivos.", 29.99, 4L, "p5r.webp"));
-        listaJuegos.add(new Game(36L, "Dragon Age: Inquisition", "RPG de fantasía donde lideras un grupo y tomas decisiones que afectan el destino del mundo.", 19.99, 4L, "dai.jpg"));
+        listaJuegos.add(new Game(36L, "Dragon Age: Inquisition", "RPG de fantasía donde lideras un grupo y tomas decisiones que afectan el destino del mundo.", 19.99, 4L, "dai.png"));
         listaJuegos.add(new Game(37L, "Clair Obscur: Expedition 33", "RPG por turnos con mecánicas en tiempo real ambientado en un mundo inspirado en la Belle Époque francesa.", 49.99, 4L, "expedition33.webp"));
         listaJuegos.add(new Game(38L, "Fallout 4", "RPG postapocalíptico donde exploras un mundo devastado lleno de decisiones y supervivencia.", 19.99, 4L, "fallout4.webp"));
         listaJuegos.add(new Game(39L, "Kingdom Come: Deliverance", "RPG realista ambientado en la Edad Media sin elementos de fantasía.", 7.99, 4L, "kcd.jpg"));

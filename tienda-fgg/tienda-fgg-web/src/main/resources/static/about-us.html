@@ -2,26 +2,111 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>Sobre Nosotros - Tienda FGG</title>
-        <link rel="stylesheet" href="css/estilos.css">
+        <title>Sobre Nosotros - FGG</title>
+        <link rel="stylesheet" href="/css/estilos.css">
     </head>
     <body>
-        <header>
-            <h1>Acerca de nuestra tienda</h1>
-        </header>
-        <main>
-            <section>
-                <h2>Nuestra Historia</h2>
-                <p>Somos una tienda especializada en videojuegos y tecnología, fundada con la misión de ofrecer los mejores productos a nuestra comunidad.</p>
+        <nav class="navbar">
+            <div class="container nav-container">
+                <a href="/" class="logo"><span class="logo-icon">🎮</span> FGG</a>
+                <ul class="nav-links">
+                    <li><a href="/categorias">Categorías</a></li>
+                    <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
+                    <li><a href="/condiciones">Condiciones</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="container section-spacing">
+            <header class="page-header">
+                <span class="badge-alt">QUIÉNES SOMOS</span>
+                <h1>Sobre Nosotros</h1>
+            </header>
+
+            <section class="about-content-card">
+                <div class="card-inner">
+                    <h2 class="section-title-underlined">Nuestra Historia</h2>
+                    <p class="about-text">
+                        Somos una tienda especializada en videojuegos y tecnología, fundada con la misión de ofrecer los mejores productos a nuestra comunidad. Más que una tienda, somos un punto de encuentro para los apasionados del gaming.
+                    </p>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="time-node"></div>
+                            <span class="time-year">2019</span>
+                            <h3 class="time-title">El Origen</h3>
+                            <p class="time-desc">FGG nació entre amigos apasionados del gaming con la visión de crear algo más que una tienda.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="time-node"></div>
+                            <span class="time-year">2020</span>
+                            <h3 class="time-title">Primera Expansión</h3>
+                            <p class="time-desc">Ampliamos el catálogo a más de 50 títulos y lanzamos nuestra comunidad online con más de 10.000 miembros.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="time-node"></div>
+                            <span class="time-year">2022</span>
+                            <h3 class="time-title">Reconocimiento</h3>
+                            <p class="time-desc">Premiados como mejor tienda especializada de videojuegos por la comunidad gamer española.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="time-node"></div>
+                            <span class="time-year">2026</span>
+                            <h3 class="time-title">El Futuro</h3>
+                            <p class="time-desc">Lanzamos FGG 2.0 con nueva tecnología, nuevas categorías y una experiencia completamente rediseñada.</p>
+                        </div>
+                    </div>
+                </div>
             </section>
-            <section>
-                <h2>Contacto</h2>
-                <p>Puedes encontrarnos en nuestra sede central o escribirnos a través de nuestras redes sociales.</p>
+
+            <section class="about-content-card contact-section">
+                <div class="card-inner">
+                    <h2 class="section-title-underlined">Contacto</h2>
+                    <p class="about-text">
+                        Puedes encontrarnos en nuestra sede central o escribirnos a través de nuestras redes sociales. Estamos disponibles para resolver cualquier duda.
+                    </p>
+
+                    <div class="contact-grid">
+                        <div class="contact-box">
+                            <span class="contact-label">EMAIL</span>
+                            <span class="contact-value">email@fgg.gg</span>
+                        </div>
+                        <div class="contact-box">
+                            <span class="contact-label">DISCORD</span>
+                            <span class="contact-value">discord.gg/fgg</span>
+                        </div>
+                        <div class="contact-box">
+                            <span class="contact-label">TWITTER</span>
+                            <span class="contact-value">@FGGaming</span>
+                        </div>
+                    </div>
+                </div>
             </section>
-            <p><a href="./">Volver a la página principal</a></p>
         </main>
-        <footer>
-            <p>&copy; 2024 Tienda FGG</p>
+
+        <footer class="main-footer">
+            <div class="container footer-grid">
+                <div class="footer-brand">
+                    <div class="logo"><span class="logo-icon">🎮</span> FGG</div>
+                    <p>Future Gaming Ground — Tu tienda de videojuegos de confianza.</p>
+                </div>
+                <div class="footer-css">
+                    <h3>EXPLORAR</h3>
+                    <p><a href="/categorias">Categorías</a></p>
+                    <p><a href="/categorias/1">Aventuras</a></p>
+                    <p><a href="/categorias/2">Shooter</a></p>
+                    <p><a href="/categorias/3">Estrategia</a></p>
+                    <p><a href="/categorias/4">RPG</a></p>
+                </div>
+                <div class="footer-css">
+                    <h3>LEGAL</h3>
+                    <p><a href="/sobre-nosotros">Sobre Nosotros</a></p>
+                    <p><a href="/condiciones">Condiciones de Uso</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 FGG — Future Gaming Ground. Todos los derechos reservados.</p>
+            </div>
         </footer>
     </body>
 </html>

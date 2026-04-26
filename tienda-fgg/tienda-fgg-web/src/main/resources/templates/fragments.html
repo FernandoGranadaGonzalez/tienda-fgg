@@ -2,31 +2,58 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:fragment="head_comun">
         <meta charset="UTF-8">
-        <title>Tienda FGG - Videojuegos</title>
+        <title>FGG - Future Gaming Ground</title>
         <link rel="stylesheet" th:href="@{/css/estilos.css}">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     </head>
     <body>
-        <header th:fragment="menu_navegacion">
-            <nav>
-                <ul>
-                    <li><a th:href="@{/}">Inicio</a></li>
+        <nav class="navbar" th:fragment="menu_navegacion">
+            <div class="container nav-container">
+                <a th:href="@{/}" class="logo">
+                    <span class="logo-icon">🎮</span> FGG
+                </a>
+                <ul class="nav-links">
                     <li><a th:href="@{/categorias}">Categorías</a></li>
-                    <li><a th:href="@{/about-us.html}">Sobre Nosotros</a></li>
-                    <li><a th:href="@{/condiciones}">Condiciones de Uso</a></li>
+                    <li><a href="/about-us.html">Sobre Nosotros</a></li>
+                    <li><a th:href="@{/condiciones}">Condiciones</a></li>
                 </ul>
-            </nav>
-            <nav>
-                <form th:action="@{/categorias/buscar}" method="get" style="display: inline-block;">
-                    <input type="text" name="query" placeholder="Buscar juego..." required>
-                    <button type="submit">🔍</button>
-                </form>
-            </nav>
-            <hr>
-        </header>
+                <div class="nav-search">
+                    <form th:action="@{/categorias/buscar}" method="get" class="search-wrapper">
+                        <input type="text" name="query" placeholder="Buscar juego..." required>
+                        <button type="submit">🔍</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
 
-        <footer th:fragment="pie_pagina">
-            <hr>
-            <p>&copy; 2024 - Tienda de Videojuegos FGG</p>
+        <footer class="main-footer" th:fragment="pie_pagina">
+            <div class="container footer-grid">
+                <div class="footer-brand">
+                    <div class="logo" style="color: white;"><span class="logo-icon"></span> FGG</div>
+                    <p>Future Gaming Ground — Tu tienda de videojuegos de confianza. Los mejores títulos, las mejores categorías.</p>
+                    <div class="social-icons"> </div>
+                </div>
+                <div class="footer-css">
+                    <h4>EXPLORAR</h4>
+                    <ul>
+                        <li><a th:href="@{/categorias}">Categorías</a></li>
+                        <li><a th:href="@{/categorias/1}">Aventuras</a></li>
+                        <li><a th:href="@{/categorias/2}">Shooter</a></li>
+                        <li><a th:href="@{/categorias/3}">Estrategia</a></li>
+                        <li><a th:href="@{/categorias/4}">RPG</a></li>
+                    </ul>
+                </div>
+                <div class="footer-css">
+                    <h4>LEGAL</h4>
+                    <ul>
+                        <li><a href="/about-us.html">Sobre Nosotros</a></li>
+                        <li><a th:href="@{/condiciones}">Condiciones</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 FGG — Future Gaming Ground. Todos los derechos reservados.</p>
+            </div>
         </footer>
     </body>
 </html>
