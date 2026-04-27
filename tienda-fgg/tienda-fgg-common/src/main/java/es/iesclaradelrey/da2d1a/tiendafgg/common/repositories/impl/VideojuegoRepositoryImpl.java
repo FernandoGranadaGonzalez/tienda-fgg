@@ -7,11 +7,34 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementación del repositorio de videojuegos basada en almacenamiento en memoria.
+ * <p>
+ * Esta clase gestiona el catálogo completo de la tienda mediante una lista interna.
+ * Proporciona capacidades de filtrado por categoría y búsqueda textual por título.
+ * Al estar anotada con {@code @Repository}, Spring la detecta automáticamente
+ * para su inyección de dependencias.
+ * </p>
+ * * @author TuNombre
+ * @version 1.0
+ */
 @Repository
 public class VideojuegoRepositoryImpl implements VideojuegoRepository {
 
+    /**
+     * Fuente de datos interna que contiene todos los objetos {@link Videojuego}.
+     * Se utiliza una {@link ArrayList} para mantener el orden de inserción.
+     */
     private final List<Videojuego> listaJuegos = new ArrayList<>();
 
+    /**
+     * Constructor del repositorio.
+     * <p>
+     * Inicializa el catálogo con una colección extensa de videojuegos de prueba
+     * clasificados por categorías (Aventura, Shooter, Estrategia, RPG).
+     * Esto permite disponer de datos funcionales inmediatamente tras el arranque.
+     * </p>
+     */
     public VideojuegoRepositoryImpl() {
         listaJuegos.add(new Videojuego(1L, "The Legend of Zelda: Breath of the Wild", "Un enorme mundo abierto donde exploras, resuelves puzzles y enfrentas enemigos con total libertad.", 59.99, 1L, "botw.jpg"));
         listaJuegos.add(new Videojuego(2L, "Uncharted 4: A Thief's End", "Aventura cinematográfica llena de acción, tesoros y persecuciones con Nathan Drake.", 19.99, 1L, "uncharted4.jpg"));
@@ -49,11 +72,24 @@ public class VideojuegoRepositoryImpl implements VideojuegoRepository {
         listaJuegos.add(new Videojuego(31L, "Octopath Traveler", "RPG clásico por turnos con estilo visual único y múltiples historias entrelazadas.", 23.99, 4L, "octopathtraveller.jpg"));
     }
 
+    /**
+     * Obtiene todos los videojuegos disponibles en el catálogo.
+     * * @return Una copia de la {@link List} que contiene todos los videojuegos.
+     */
     @Override
     public List<Videojuego> obtenerTodos() {
         return new ArrayList<>(listaJuegos);
     }
 
+    /**
+     * Filtra los videojuegos según su categoría.
+     * <p>
+     * Utiliza la API de Streams de Java para recorrer la lista y extraer
+     * únicamente aquellos juegos cuyo {@code categoriaId} coincida con el proporcionado.
+     * </p>
+     * * @param categoriaId El identificador de la categoría a filtrar.
+     * @return Una lista de videojuegos que pertenecen a dicha categoría.
+     */
     @Override
     public List<Videojuego> buscarPorCategoria(Long categoriaId) {
         return listaJuegos.stream()
@@ -61,6 +97,15 @@ public class VideojuegoRepositoryImpl implements VideojuegoRepository {
                 .toList();
     }
 
+    /**
+     * Realiza una búsqueda de videojuegos por coincidencia en el título.
+     * <p>
+     * La búsqueda es insensible a mayúsculas y minúsculas (case-insensitive).
+     * Si la consulta es nula o está vacía, se devuelve una lista vacía por seguridad.
+     * </p>
+     * * @param query El texto a buscar dentro de los títulos de los videojuegos.
+     * @return Una lista de videojuegos cuyo título contenga la cadena buscada.
+     */
     @Override
     public List<Videojuego> buscarPorNombre(String query) {
         if (query == null || query.isBlank()) return new ArrayList<>();
