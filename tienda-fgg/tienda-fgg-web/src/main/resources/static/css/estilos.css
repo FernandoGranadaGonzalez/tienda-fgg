@@ -411,7 +411,6 @@ body {
     font-size: 1.1rem;
 }
 
-/*
 .game-badge {
     position: absolute;
     top: 10px;
@@ -423,7 +422,7 @@ body {
     padding: 3px 8px;
     border-radius: 5px;
     z-index: 10;
-}*/
+}
 
 .alert {
     background: #f1f5f9;
@@ -629,4 +628,78 @@ body {
 
 .search-wrapper button:hover {
     transform: scale(1.2);
+}
+
+.products-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.product-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 180px; /* Foto | Info | Precio */
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    gap: 20px;
+    border: 1px solid #edf2f7;
+}
+
+.product-row img {
+    width: 100px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.product-info h3 {
+    margin: 0;
+    color: var(--dark);
+    font-size: 1.3rem;
+}
+
+.product-info p {
+    margin: 0;
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.product-price-action {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.discount-pill {
+    background: #ffeded;
+    color: #e53e3e;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.price-tag {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #a0aec0;
+    font-size: 0.9rem;
 }
