@@ -1,59 +1,36 @@
 package es.iesclaradelrey.da2d1a.tiendafgg.common.entities;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Entidad que representa un videojuego dentro del catálogo de la tienda.
- * <p>
- * Contiene la información comercial y técnica de cada título, incluyendo su
- * vinculación con una categoría específica mediante su identificador.
- * </p>
- * * @author TuNombre
- * @version 1.0
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Entity
+@Table(name = "videojuegos")
 public class Videojuego {
 
-    /**
-     * Identificador único del videojuego en el sistema.
-     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * Título o nombre comercial del videojuego.
-     */
+    @Column(nullable = false, length = 200)
     private String titulo;
 
-    /**
-     * Resumen o detalles del contenido del juego.
-     */
+    @Column(length = 2000)
     private String descripcion;
 
-    /**
-     * Precio de venta al público (PVP).
-     */
+    @Column(nullable = false)
     private Double precio;
 
-    /**
-     * Identificador de la categoría a la que pertenece este videojuego.
-     * Actúa como clave foránea (FK) a nivel de lógica de negocio.
-     */
+    @Column(name = "categoria_id")
     private Long categoriaId;
 
-    /**
-     * Nombre del archivo o URL de la carátula del videojuego.
-     * <p>
-     * Se inicializa por defecto con "no-image.jpg" si no se proporciona una.
-     * La anotación {@code @Builder.Default} garantiza que este valor se mantenga
-     * incluso si se instancia el objeto mediante el patrón Builder.
-     * </p>
-     */
     @Builder.Default
+    @Column(length = 500)
     private String imagen = "no-image.jpg";
 }
