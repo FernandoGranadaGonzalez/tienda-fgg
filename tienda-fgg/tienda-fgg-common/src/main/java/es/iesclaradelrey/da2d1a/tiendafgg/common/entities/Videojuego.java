@@ -18,14 +18,23 @@ public class Videojuego {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 13)
+    private String codigoEan;
+
     @Column(nullable = false, length = 200)
     private String titulo;
 
-    @Column(length = 2000)
+    @Column(length = 50)
+    private String marca;
+
+    @Column(nullable = false, length = 4000)
     private String descripcion;
 
     @Column(nullable = false)
     private Double precio;
+
+    @Column(nullable = false)
+    private Integer descuento;
 
     @Column(name = "categoria_id")
     private Long categoriaId;
