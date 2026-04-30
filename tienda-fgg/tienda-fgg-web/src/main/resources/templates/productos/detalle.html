@@ -1,31 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-    <head>
-        <meta charset="UTF-8">
+    <head th:replace="~{fragments :: head_comun}">
         <title th:text="${juego.titulo} + ' - Detalle'"></title>
-        <link rel="stylesheet" th:href="@{/css/estilos.css}">
-        <style>
-            .detail-container { display: grid; grid-template-columns: 400px 1fr; gap: 40px; margin-top: 30px; }
-            .detail-img img { width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-            .ean-code { background: #f1f5f9; padding: 5px 10px; border-radius: 5px; font-family: monospace; font-size: 0.9rem; }
-        </style>
     </head>
     <body>
-        <div class="container section-spacing">
+        <div th:replace="~{fragments :: menu_navegacion}"></div>
+        
+        <main class="container section-spacing">
             <a th:href="@{/productos}" class="explore-link">← Volver al inventario</a>
         
             <div class="detail-container">
                 <div class="detail-img">
                     <img th:src="${juego.imagen != null && !juego.imagen.isEmpty()}
-                                     ? @{/imagenes/portadas/{img}(img=${juego.imagen})}
-                                     : @{/imagenes/portadas/no-image.png}"
+                                             ? @{/imagenes/portadas/{img}(img=${juego.imagen})}
+                                             : @{/imagenes/portadas/no-image.png}"
                          th:alt="'Imagen de ' + ${juego.titulo}"
                          th:onerror="|this.onerror=null;this.src='@{/imagenes/portadas/no-image.png}';|">
                 </div>
         
                 <div class="product-info">
                     <span class="badge-alt" th:if="${juego.marca}" th:text="${juego.marca}">Marca</span>
-                    <h1 th:text="${juego.titulo}"></h1>
+                    <h1 th:text="${juego.titulo}" style="font-size: 3rem; margin: 10px 0;"></h1>
         
                     <p><strong>Código EAN-13:</strong> <span class="ean-code" th:text="${juego.codigoEan}"></span></p>
         
@@ -33,7 +28,7 @@
                         <th:block th:if="${juego.descuento > 0}">
                             <span class="discount-pill" th:text="'-' + ${juego.descuento} + '%'"></span>
                             <span class="old-price" th:text="${juego.precio} + '€'"></span>
-                            <span class="price-tag" style="font-size: 2rem;"
+                            <span class="price-tag" style="font-size: 2rem; display: block;"
                                   th:text="${#numbers.formatDecimal(juego.precio * (1 - juego.descuento/100.0), 1, 2) + '€'}"></span>
                         </th:block>
                         <th:block th:unless="${juego.descuento > 0}">
@@ -41,10 +36,11 @@
                         </th:block>
                     </div>
         
-                    <h3>Descripción</h3>
-                    <p th:text="${juego.descripcion}" style="line-height: 1.6; color: var(--text-gray);"></p>
+                    <h3 style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">Descripción</h3>
+                    <p th:text="${juego.descripcion}" style="line-height: 1.8; color: var(--text-gray); font-size: 1.1rem;"></p>
                 </div>
             </div>
-        </div>
+        </main>
+        <footer th:replace="~{fragments :: pie_pagina}"></footer>
     </body>
 </html>

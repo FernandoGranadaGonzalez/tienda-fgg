@@ -3,7 +3,7 @@
     <head th:replace="~{fragments :: head_comun}"></head>
     <body>
         <div th:replace="~{fragments :: menu_navegacion}"></div>
-
+        
         <main class="container section-spacing">
             <header class="page-header">
                 <span class="badge-alt">BÚSQUEDA</span>
@@ -13,7 +13,7 @@
                     <span th:text="${#lists.size(listaJuegos)} == 1 ? 'resultado encontrado' : 'resultados encontrados'">resultado encontrado</span>
                 </p>
             </header>
-
+        
             <div class="catalog-layout">
                 <aside class="sidebar">
                     <span class="sidebar-label">CATEGORÍAS</span>
@@ -25,14 +25,14 @@
                         </a>
                     </nav>
                 </aside>
-
+        
                 <section class="games-catalog">
                     <div th:if="${not #lists.isEmpty(listaJuegos)}" class="games-grid-detail">
-
+        
                         <div class="game-item-card" th:each="juego : ${listaJuegos}">
                             <div class="game-item-img">
                                 <!--<span class="game-badge">BEST SELLER</span>-->
-
+        
                                 <img th:src="@{/imagenes/portadas/{img}(img=${juego.imagen != null ? juego.imagen : 'default.jpg'})}"
                                      th:alt="${juego.titulo}">
                             </div>
@@ -48,14 +48,14 @@
                             </div>
                         </div>
                     </div>
-
+        
                     <div th:if="${#lists.isEmpty(listaJuegos)}" class="alert">
                         <p>Lo sentimos, no hemos encontrado ningún juego con ese título.</p>
                     </div>
                 </section>
             </div>
         </main>
-
+        
         <footer th:replace="~{fragments :: pie_pagina}"></footer>
     </body>
 </html>

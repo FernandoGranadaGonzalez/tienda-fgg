@@ -5,6 +5,7 @@
     --text-gray: #667c89;
     --white: #ffffff;
     --blue: #0F2ED2;
+    --light-blue: #539AEF;
 }
 
 body {
@@ -87,22 +88,55 @@ body {
 .hero h1 { font-size: 4rem; margin: 20px 0; color: var(--primary);}
 .hero h1 span { color: var(--primary); }
 .hero p { font-size: 1.2rem; max-width: 600px; color: #cbd5e1; }
-.hero-btns { display: flex; gap: 15px; margin-top: 30px; }
+.hero-btns {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
 
 .btn-primary {
     background: var(--primary);
     color: white;
-    padding: 12px 30px;
+    padding: 12px 24px;
     border-radius: 30px;
     text-decoration: none;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
 }
+
 .btn-secondary {
     background: rgba(255,255,255,0.1);
     color: white;
-    padding: 12px 30px;
+    padding: 12px 24px;
     border-radius: 30px;
     text-decoration: none;
     border: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.btn-tertiary {
+    background: var(--light-blue);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
 }
 
 .search-stats { padding: 80px 0; text-align: center; }
@@ -701,5 +735,32 @@ body {
 .old-price {
     text-decoration: line-through;
     color: #a0aec0;
+    font-size: 0.9rem;
+}
+
+.btn-primary:hover, .btn-tertiary:hover, .btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    filter: brightness(1.1);
+}
+
+.detail-container {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.detail-img img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.ean-code {
+    background: #f1f5f9;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: monospace;
     font-size: 0.9rem;
 }
