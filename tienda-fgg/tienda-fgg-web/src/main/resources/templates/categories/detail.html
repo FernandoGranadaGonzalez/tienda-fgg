@@ -37,6 +37,14 @@
                             </div>
                             <div class="game-item-body">
                                 <h3 th:text="${juego.titulo}">Juego</h3>
+
+                                <p class="game-brand"
+                                   th:text="${juego.marca.nombre}"
+                                   style="font-size: 0.75rem; color: #888; text-transform: uppercase; margin-top: -5px; margin-bottom: 10px;">
+                                    Marca
+                                </p>
+
+                                <div class="game-item-footer" style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
                                 <div class="game-item-footer" style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
 
                                     <th:block th:if="${juego.descuento > 0}">

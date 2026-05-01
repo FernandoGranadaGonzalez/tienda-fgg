@@ -14,30 +14,20 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "categorias")
-public class Categoria {
+@Table(name = "marcas")
+public class Marca {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, unique = true)
     private String nombre;
 
-    @ManyToMany(mappedBy = "categorias")
+    @OneToMany(mappedBy = "marca", cascade = CascadeType.ALL)
     private List<Videojuego> videojuegos = new ArrayList<>();
 
-    @Column(length = 2000)
-    private String descripcion;
-
-    @Builder.Default
-    @Column(length = 500)
-    private String imagen = "default-category.jpg";
-
-    public Categoria(Long id, String nombre, String descripcion) {
-        this.id = id;
+    public Marca(String nombre) {
         this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.imagen = "default-category.jpg";
     }
 }

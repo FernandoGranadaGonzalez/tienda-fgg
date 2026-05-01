@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,8 +27,18 @@ public class Videojuego {
     @Column(nullable = false, length = 200)
     private String titulo;
 
-    @Column(length = 50)
-    private String marca;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "marca_id", nullable = false)
+    private Marca marca;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "videojuego_categoria",
+            joinColumns = @JoinColumn(name = "videojuego_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id")
+    )
+
+    private List<Categoria> categorias = new ArrayList<>();
 
     @Column(nullable = false, length = 4000)
     private String descripcion;
@@ -35,9 +48,6 @@ public class Videojuego {
 
     @Column(nullable = false)
     private Integer descuento;
-
-    @Column(name = "categoria_id")
-    private Long categoriaId;
 
     @Builder.Default
     @Column(length = 500)

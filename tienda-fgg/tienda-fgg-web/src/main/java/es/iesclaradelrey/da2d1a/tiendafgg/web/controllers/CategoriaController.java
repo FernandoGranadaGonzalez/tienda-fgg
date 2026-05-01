@@ -7,6 +7,8 @@ import es.iesclaradelrey.da2d1a.tiendafgg.common.services.VideojuegoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -66,8 +68,16 @@ public class CategoriaController {
      */
     @GetMapping("/{id}")
     public String detail(@PathVariable Long id, Model model) {
-        model.addAttribute("categoria", categoryService.buscarPorId(id).orElse(null));
-        model.addAttribute("listaJuegos", gameService.obtenerJuegosDeCategoria(id));
+        Categoria categoria = categoryService.buscarPorId(id).orElse(null);
+        List<Videojuego> listaJuegos = gameService.obtenerJuegosDeCategoria(id);
+
+        // REQUISITO: Ordenación alfabética por título
+        if (listaJuegos != null) {
+            listaJuegos.sort(Comparator.comparing(Videojuego::getTitulo, String.CASE_INSENSITIVE_ORDER));
+        }
+
+        model.addAttribute("categoria", categoria);
+        model.addAttribute("listaJuegos", listaJuegos);
         return "categories/detail";
     }
 
@@ -80,7 +90,14 @@ public class CategoriaController {
      */
     @GetMapping("/buscar")
     public String buscar(@RequestParam(name = "query", required = false) String query, Model model) {
-        model.addAttribute("listaJuegos", gameService.buscarPorNombre(query));
+        List<Videojuego> resultados = gameService.buscarPorNombre(query);
+
+        // REQUISITO: Ordenación alfabética por título
+        if (resultados != null) {
+            resultados.sort(Comparator.comparing(Videojuego::getTitulo, String.CASE_INSENSITIVE_ORDER));
+        }
+
+        model.addAttribute("listaJuegos", resultados);
         model.addAttribute("query", query);
         return "categories/search-results";
     }

@@ -24,8 +24,7 @@
                     <div class="product-info">
                         <h3 th:text="${juego.titulo}">Título</h3>
                         <p th:text="${#strings.abbreviate(juego.descripcion, 250)}">Descripción corta...</p>
-                        <small th:if="${juego.marca}" th:text="'Marca: ' + ${juego.marca}" style="color: #94a3b8;"></small>
-                    </div>
+                        <small th:if="${juego.marca}" th:text="'Marca: ' + ${juego.marca.nombre}" style="color: #94a3b8;"></small>                    </div>
 
                     <div class="product-price-action">
                         <th:block th:if="${juego.descuento > 0}">

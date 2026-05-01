@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="product-info">
-                    <span class="badge-alt" th:if="${juego.marca}" th:text="${juego.marca}">Marca</span>
+                    <span class="badge-alt" th:if="${juego.marca}" th:text="${juego.marca.nombre}">Marca</span>
                     <h1 th:text="${juego.titulo}" style="font-size: 3rem; margin: 10px 0;"></h1>
 
                     <p><strong>Código EAN-13:</strong> <span class="ean-code" th:text="${juego.codigoEan}"></span></p>
@@ -36,6 +36,7 @@
 
                     <h3 style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">Descripción</h3>
                     <p th:text="${juego.descripcion}" style="line-height: 1.8; color: var(--text-gray); font-size: 1.1rem;"></p>
+                    <span class="badge-alt" th:if="${juego.marca}" th:text="${juego.marca.nombre}">Marca</span>
                 </div>
             </div>
         </main>
