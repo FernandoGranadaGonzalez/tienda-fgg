@@ -1,0 +1,129 @@
+:root {
+    --primary: #0da68e;
+    --primary-hover: #0a8a76;
+    --dark: #0b1a26;
+    --text-gray: #667c89;
+    --white: #ffffff;
+    --bg-admin: #f1f5f9;
+    --danger: #dc3545;
+    --warning: #ffc107;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    color: var(--dark);
+    background-color: var(--bg-admin);
+}
+
+.table {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: none;
+}
+
+.table thead {
+    background-color: var(--dark);
+    color: var(--white);
+}
+
+.table thead th {
+    padding: 15px;
+    font-weight: 500;
+    border: none;
+}
+
+.table tbody td {
+    padding: 12px 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.table tfoot {
+    background-color: #fafbfc;
+    font-style: italic;
+    color: var(--text-gray);
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.card-header {
+    background-color: var(--white);
+    border-bottom: 1px solid #f1f5f9;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 8px;
+}
+
+.form-control, .form-select {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(13, 166, 142, 0.1);
+}
+
+.form-check-input:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.border-danger {
+    border: 2px solid var(--danger) !important;
+}
+
+.bg-danger {
+    background-color: var(--danger) !important;
+}
+
+.admin-header {
+    background: var(--white);
+    padding: 20px 0;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.admin-nav-link {
+    color: var(--text-gray);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: background 0.3s;
+}
+
+.admin-nav-link:hover, .admin-nav-link.active {
+    background: #e6f6f4;
+    color: var(--primary);
+}

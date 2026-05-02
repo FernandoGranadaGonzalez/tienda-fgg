@@ -11,4 +11,6 @@ public interface CategoriaService {
     Optional<Categoria> buscarPorId(Long id);
 
     void guardar(Categoria categoria);
+
+    void eliminar(Long id);
 }

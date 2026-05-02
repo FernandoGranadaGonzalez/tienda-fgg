@@ -13,4 +13,8 @@ public interface VideojuegoService {
     List<Videojuego> buscarPorNombre(String query);
 
     Optional<Videojuego> buscarPorId(Long id);
+
+    void guardar(Videojuego videojuego);
+
+    void eliminar(Long id);
 }
