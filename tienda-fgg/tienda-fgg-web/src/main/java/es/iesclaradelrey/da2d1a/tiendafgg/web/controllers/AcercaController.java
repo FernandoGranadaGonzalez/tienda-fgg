@@ -4,23 +4,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * Controlador web responsable de gestionar las páginas estáticas o informativas.
+ * Controlador web responsable de gestionar las páginas estáticas o informativas del sitio.
  * <p>
  * Se encarga de mapear las peticiones HTTP GET a las vistas correspondientes,
- * facilitando la navegación por páginas que no requieren interacción con la capa
- * de servicios o acceso a base de datos.
+ * facilitando la navegación por secciones informativas que no requieren
+ * procesamiento de datos complejos o acceso a la capa de servicios.
  * </p>
- * * @author TuNombre
+ *
+ * @author Fernando Granada
  * @version 1.0
  */
 @Controller
 public class AcercaController {
 
     /**
-     * Gestiona la petición a la página de "Sobre nosotros".
+     * Gestiona la petición a la página de información corporativa "Sobre nosotros".
      * <p>
      * Mapea la URL {@code /sobre-nosotros} para renderizar la plantilla
-     * HTML definida en {@code about-us.html}.
+     * ubicada en {@code src/main/resources/templates/about-us.html}.
      * </p>
      *
      * @return El nombre de la vista (template) a renderizar.
@@ -31,10 +32,15 @@ public class AcercaController {
     }
 
     /**
-     * Gestiona la petición a la página de términos y condiciones.
+     * Gestiona la petición a la página de términos y condiciones legales.
      * <p>
      * Mapea la URL {@code /condiciones} para renderizar la plantilla
-     * {@code legal/terms.html}.
+     * ubicada en {@code src/main/resources/templates/legal/terms.html}.
+     * </p>
+     * <p>
+     * <b>Nota:</b> Si esta ruta también está definida en {@code WebConfiguracion},
+     * Spring priorizará una de las dos. Es recomendable centralizar los mapeos
+     * simples en un solo lugar para evitar conflictos de ambigüedad.
      * </p>
      *
      * @return El nombre de la vista (template) a renderizar.
