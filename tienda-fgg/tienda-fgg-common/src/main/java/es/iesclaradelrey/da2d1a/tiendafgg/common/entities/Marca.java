@@ -1,10 +1,7 @@
 package es.iesclaradelrey.da2d1a.tiendafgg.common.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +22,7 @@ public class Marca {
     private String nombre;
 
     @OneToMany(mappedBy = "marca", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Videojuego> videojuegos = new ArrayList<>();
 
     public Marca(String nombre) {

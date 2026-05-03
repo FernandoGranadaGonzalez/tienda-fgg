@@ -4,8 +4,11 @@ import es.iesclaradelrey.da2d1a.tiendafgg.common.entities.Videojuego;
 import es.iesclaradelrey.da2d1a.tiendafgg.common.services.CategoriaService;
 import es.iesclaradelrey.da2d1a.tiendafgg.common.services.MarcaService;
 import es.iesclaradelrey.da2d1a.tiendafgg.common.services.VideojuegoService;
+import jakarta.validation.Valid;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -52,12 +55,23 @@ public class VideojuegoAdminController {
     }
 
     @PostMapping("/save")
-    public String guardar(@ModelAttribute("videojuego") Videojuego videojuego, Model model) {
+    public String guardar(@Valid @ModelAttribute("videojuego") Videojuego videojuego, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("marcas", marcaService.obtenerTodos());
+            model.addAttribute("todasCategorias", categoriaService.obtenerTodos());
+            return "admin/videojuegos/formulario";
+        }
+
         try {
             videojuegoService.guardar(videojuego);
             return "redirect:/admin/productos";
+        } catch (DataIntegrityViolationException e) {
+            model.addAttribute("error", "Ya existe un videojuego con ese título.");
+            model.addAttribute("marcas", marcaService.obtenerTodos());
+            model.addAttribute("todasCategorias", categoriaService.obtenerTodos());
+            return "admin/videojuegos/formulario";
         } catch (Exception e) {
-            model.addAttribute("error", "Error al guardar el videojuego: " + e.getMessage());
+            model.addAttribute("error", "Error inesperado: " + e.getMessage());
             model.addAttribute("marcas", marcaService.obtenerTodos());
             model.addAttribute("todasCategorias", categoriaService.obtenerTodos());
             return "admin/videojuegos/formulario";

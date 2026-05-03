@@ -45,7 +45,6 @@
                                 </p>
 
                                 <div class="game-item-footer" style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
-                                <div class="game-item-footer" style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
 
                                     <th:block th:if="${juego.descuento > 0}">
                                         <span class="discount-pill" th:text="'-' + ${juego.descuento} + '% OFF'" style="font-size: 0.7rem; padding: 1px 6px;"></span>
@@ -65,10 +64,14 @@
                             </div>
                         </div>
                     </div>
-
-                    <div th:if="${#lists.isEmpty(listaJuegos)}" class="alert">
-                        <p>Próximamente añadiremos títulos a esta categoría.</p>
-                    </div>
+                        <div th:if="${#lists.isEmpty(listaJuegos)}" class="text-center py-5 shadow-sm rounded bg-white border">
+                            <div class="mb-3">
+                                <i class="bi bi-controller" style="font-size: 3rem; color: #ccc;"></i>
+                            </div>
+                            <h3 class="h5 text-muted">Próximamente añadiremos títulos a esta categoría</h3>
+                            <p class="text-secondary">Estamos trabajando para traerte los mejores juegos de <span th:text="${categoria.nombre}"></span>.</p>
+                            <a th:href="@{/}" class="btn btn-primary mt-3">Volver al inicio</a>
+                        </div>
                 </section>
             </div>
         </main>

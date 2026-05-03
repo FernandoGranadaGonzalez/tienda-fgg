@@ -16,9 +16,9 @@
                             <h2 class="h5 mb-0">Atención: Confirmar Borrado</h2>
                         </div>
                         <div class="card-body text-center">
-                            <p class="fs-5">
-                                ¿Seguro que desea borrar el elemento:
-                                <strong th:text="${elemento.nombre != null ? elemento.nombre : elemento.titulo}">Elemento</strong>?
+                            <p>
+                                ¿Estás seguro de que quieres eliminar este elemento:
+                                <strong th:text="${elemento instanceof T(es.iesclaradelrey.da2d1a.tiendafgg.common.entities.Videojuego) ? elemento.titulo : elemento.nombre}"></strong>?
                             </p>
 
                             <div th:if="${error}" class="alert alert-warning mb-4" th:text="${error}"></div>

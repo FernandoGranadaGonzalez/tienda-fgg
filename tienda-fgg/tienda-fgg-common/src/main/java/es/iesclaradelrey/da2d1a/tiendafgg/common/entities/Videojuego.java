@@ -1,6 +1,9 @@
 package es.iesclaradelrey.da2d1a.tiendafgg.common.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +27,7 @@ public class Videojuego {
     @Column(nullable = false, length = 13)
     private String codigoEan;
 
-    @Column(nullable = false, length = 200)
+    @Column(unique = true, nullable = false, length = 200)
     private String titulo;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -44,9 +47,12 @@ public class Videojuego {
     private String descripcion;
 
     @Column(nullable = false)
+    @PositiveOrZero(message = "El precio no puede ser negativo")
     private Double precio;
 
     @Column(nullable = false)
+    @Min(value = 0, message = "El descuento no puede ser negativo")
+    @Max(value = 100, message = "El descuento no puede ser mayor al 100%")
     private Integer descuento;
 
     @Builder.Default

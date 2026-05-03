@@ -8,6 +8,12 @@
     </head>
     <body>
         <nav class="navbar" th:fragment="menu_navegacion">
+            <div class="admin-top-bar">
+                <div class="admin-content">
+                    <span class="admin-label">Modo Administrador</span>
+                    <a th:href="@{/admin}" class="admin-link">⚙ PANEL DE CONTROL</a>
+                </div>
+            </div>
             <div class="container nav-container">
                 <a th:href="@{/}" class="logo">
                     <span class="logo-icon">🎮</span> FGG

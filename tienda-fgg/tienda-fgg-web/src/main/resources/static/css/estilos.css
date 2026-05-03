@@ -764,3 +764,45 @@ body {
     font-family: monospace;
     font-size: 0.9rem;
 }
+
+.admin-top-bar {
+    background-color: #FFFFFF;
+    width: 100%;
+    padding: 8px 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    /*border-bottom: 1px solid #1a1a1a;*/
+}
+
+.admin-content {
+    padding: 0 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+/*
+.admin-label {
+    color: #667C89;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: sans-serif;
+}*/
+
+.admin-link {
+    color: #0da68e;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: bold;
+    font-family: sans-serif;
+    transition: color 0.3s;
+}
+
+.admin-link:hover {
+    color: #0bc4a8;
+    text-decoration: underline;
+}

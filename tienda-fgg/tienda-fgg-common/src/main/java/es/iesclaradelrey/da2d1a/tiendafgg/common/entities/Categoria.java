@@ -1,10 +1,7 @@
 package es.iesclaradelrey.da2d1a.tiendafgg.common.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +22,7 @@ public class Categoria {
     private String nombre;
 
     @ManyToMany(mappedBy = "categorias")
+    @ToString.Exclude
     private List<Videojuego> videojuegos = new ArrayList<>();
 
     @Column(length = 2000)
@@ -32,12 +30,12 @@ public class Categoria {
 
     @Builder.Default
     @Column(length = 500)
-    private String imagen = "default-category.jpg";
+    private String imagen = "no-image.png";
 
     public Categoria(Long id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.imagen = "default-category.jpg";
+        this.imagen = "no-image.png";
     }
 }
