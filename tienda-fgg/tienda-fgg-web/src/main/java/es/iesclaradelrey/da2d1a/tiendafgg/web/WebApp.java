@@ -20,7 +20,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EntityScan("es.iesclaradelrey.da2d1a.tiendafgg.common.entities")
 @EnableJpaRepositories("es.iesclaradelrey.da2d1a.tiendafgg.common.repositories")
-@ComponentScan({"es.iesclaradelrey.da2d1a.tiendafgg.web", "es.iesclaradelrey.da2d1a.tiendafgg.common"})
+@ComponentScan({"es.iesclaradelrey.da2d1a.tiendafgg.web", "es.iesclaradelrey.da2d1a.tiendafgg.common", "es.iesclaradelrey.da2d1a.tiendafgg.security"})
 public class WebApp {
 
     /**

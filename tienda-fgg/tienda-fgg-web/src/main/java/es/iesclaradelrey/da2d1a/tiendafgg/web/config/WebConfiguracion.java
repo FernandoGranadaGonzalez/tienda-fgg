@@ -30,7 +30,6 @@ public class WebConfiguracion implements WebMvcConfigurer {
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registro) {
-        // Mapea la URL "/condiciones" directamente al archivo de vista ubicado en "templates/legal/terms.html"
         registro.addViewController("/condiciones").setViewName("legal/terms");
     }
 }

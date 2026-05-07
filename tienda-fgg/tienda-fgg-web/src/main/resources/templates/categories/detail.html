@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~{fragments :: head_comun(${categoria.nombre})}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head th:replace="~{fragments :: head_comun(${categoria.nombre})}">
+        <meta name="_csrf" th:content="${_csrf.token}"/>
+        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    </head>
     <body>
         <div th:replace="~{fragments :: menu_navegacion}"></div>
-
+        
         <main class="container section-spacing">
             <header class="page-header" th:if="${categoria != null}">
                 <span class="badge-alt">CATÁLOGO</span>
                 <h1 th:text="${categoria.nombre}">Aventuras</h1>
                 <p class="subtitle" th:text="${categoria.descripcion}">Explora mundos épicos sin límites</p>
             </header>
-
+        
             <div class="catalog-layout">
                 <aside class="sidebar">
                     <span class="sidebar-label">CATEGORÍAS</span>
@@ -23,29 +26,29 @@
                         </a>
                     </nav>
                 </aside>
-
+        
                 <section class="games-catalog">
                     <div th:if="${not #lists.isEmpty(listaJuegos)}" class="games-grid-detail">
                         <div class="game-item-card" th:each="juego : ${listaJuegos}">
                             <div class="game-item-img">
                                 <img th:src="${juego.imagen != null && !juego.imagen.isEmpty()}
-                                     ? @{/imagenes/portadas/{img}(img=${juego.imagen})}
-                                     : @{/imagenes/portadas/no-image.png}"
+                                             ? @{/imagenes/portadas/{img}(img=${juego.imagen})}
+                                             : @{/imagenes/portadas/no-image.png}"
                                      th:alt="${juego.titulo != null} ? 'Imagen de ' + ${juego.titulo} : ''"
                                      th:onerror="|this.onerror=null;this.src='@{/imagenes/portadas/no-image.png}';|"
                                      style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                             <div class="game-item-body">
                                 <h3 th:text="${juego.titulo}">Juego</h3>
-
+        
                                 <p class="game-brand"
                                    th:text="${juego.marca.nombre}"
                                    style="font-size: 0.75rem; color: #888; text-transform: uppercase; margin-top: -5px; margin-bottom: 10px;">
                                     Marca
                                 </p>
-
+        
                                 <div class="game-item-footer" style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
-
+        
                                     <th:block th:if="${juego.descuento > 0}">
                                         <span class="discount-pill" th:text="'-' + ${juego.descuento} + '% OFF'" style="font-size: 0.7rem; padding: 1px 6px;"></span>
                                         <div style="display: flex; align-items: center; gap: 8px;">
@@ -53,29 +56,29 @@
                                             <span class="game-price" th:text="${#numbers.formatDecimal(juego.precio * (1 - juego.descuento/100.0), 1, 2) + '€'}"></span>
                                         </div>
                                     </th:block>
-
+        
                                     <th:block th:unless="${juego.descuento > 0}">
                                         <span class="game-price" th:text="${juego.precio} + '€'"></span>
                                     </th:block>
-
+        
                                 </div>
                                 <a th:href="@{/productos/{id}/{nombre}(id=${juego.id}, nombre=${#strings.replace(#strings.toLowerCase(juego.titulo), ' ', '-')})}"
                                    class="explore-link" style="font-size: 0.8rem; margin-top: 10px;">Ver detalles →</a>
                             </div>
                         </div>
                     </div>
-                        <div th:if="${#lists.isEmpty(listaJuegos)}" class="text-center py-5 shadow-sm rounded bg-white border">
-                            <div class="mb-3">
-                                <i class="bi bi-controller" style="font-size: 3rem; color: #ccc;"></i>
-                            </div>
-                            <h3 class="h5 text-muted">Próximamente añadiremos títulos a esta categoría</h3>
-                            <p class="text-secondary">Estamos trabajando para traerte los mejores juegos de <span th:text="${categoria.nombre}"></span>.</p>
-                            <a th:href="@{/}" class="btn btn-primary mt-3">Volver al inicio</a>
+                    <div th:if="${#lists.isEmpty(listaJuegos)}" class="text-center py-5 shadow-sm rounded bg-white border">
+                        <div class="mb-3">
+                            <i class="bi bi-controller" style="font-size: 3rem; color: #ccc;"></i>
                         </div>
+                        <h3 class="h5 text-muted">Próximamente añadiremos títulos a esta categoría</h3>
+                        <p class="text-secondary">Estamos trabajando para traerte los mejores juegos de <span th:text="${categoria.nombre}"></span>.</p>
+                        <a th:href="@{/}" class="btn btn-primary mt-3">Volver al inicio</a>
+                    </div>
                 </section>
             </div>
         </main>
-
+        
         <footer th:replace="~{fragments :: pie_pagina}"></footer>
     </body>
 </html>

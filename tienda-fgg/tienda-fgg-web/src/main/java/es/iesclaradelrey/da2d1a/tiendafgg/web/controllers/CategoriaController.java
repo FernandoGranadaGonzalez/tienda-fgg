@@ -82,8 +82,7 @@ public class CategoriaController {
     public String detail(@PathVariable Long id, Model model) {
         Categoria categoria = categoryService.buscarPorId(id).orElse(null);
         List<Videojuego> listaJuegos = gameService.obtenerJuegosDeCategoria(id);
-
-        // REQUISITO: Ordenación alfabética por título mediante Java Stream/Comparator
+        
         if (listaJuegos != null) {
             listaJuegos.sort(Comparator.comparing(Videojuego::getTitulo, String.CASE_INSENSITIVE_ORDER));
         }

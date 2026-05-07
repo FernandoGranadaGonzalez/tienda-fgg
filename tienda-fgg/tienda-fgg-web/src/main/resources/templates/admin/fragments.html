@@ -3,10 +3,15 @@
     <head th:fragment="admin-head(title)">
         <meta charset="UTF-8">
         <title th:text="${title}">Admin - Tienda</title>
+        
+        <meta name="_csrf" th:content="${_csrf.token}"/>
+        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
         <link rel="stylesheet" th:href="@{/admin/css/estilos-admin.css}">
     </head>
+    
     <header th:fragment="admin-nav">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
             <div class="container">
@@ -25,13 +30,28 @@
                             <a class="nav-link" th:href="@{/admin/categorias}">Categorías</a>
                         </li>
                     </ul>
-                    <a th:href="@{/}" class="btn btn-outline-light btn-sm">Ver Tienda</a>
+                    <div class="d-flex align-items-center gap-3">
+                        <a th:href="@{/}" class="btn btn-outline-light btn-sm">Ver Tienda</a>
+                        
+                        <form th:action="@{/logout}" method="post" class="m-0">
+                            <button type="submit" class="btn btn-danger btn-sm">Salir</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
-
+    
     <footer th:fragment="admin-scripts">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <script th:inline="javascript">
+            document.addEventListener("DOMContentLoaded", function() {
+                const token = document.querySelector('meta[name="_csrf"]')?.getAttribute('content');
+                const header = document.querySelector('meta[name="_csrf_header"]')?.getAttribute('content');
+    
+                console.log("CSRF Ready: " + header);
+            });
+        </script>
     </footer>
 </html>

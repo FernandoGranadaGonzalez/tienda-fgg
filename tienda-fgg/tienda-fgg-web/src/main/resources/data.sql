@@ -145,3 +145,25 @@ INSERT INTO videojuego_categoria
 INSERT INTO videojuego_categoria
     (videojuego_id, categoria_id) VALUES
         (33, 6);
+
+-- ROLES OBLIGATORIOS
+INSERT INTO roles (id, descripcion) VALUES ('USER', 'Usuario normal');
+INSERT INTO roles (id, descripcion) VALUES ('ADMIN', 'Administrador');
+
+-- USUARIOS INICIALES
+INSERT INTO usuarios (username, password, email, nombre, apellidos, enabled, fecha_registro)
+VALUES ('admin', '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.7u41W3u', 'admin@tienda.com', 'Admin', 'Sistema', true, NOW());
+
+INSERT INTO usuarios (username, password, email, nombre, apellidos, enabled, fecha_registro)
+VALUES ('user', '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.7u41W3u', 'user@tienda.com', 'Usuario', 'Normal', true, NOW());
+
+-- ROLES
+INSERT INTO usuarios_roles (usuario_id, rol_id)
+SELECT id, 'ADMIN' FROM usuarios WHERE username = 'admin';
+
+INSERT INTO usuarios_roles (usuario_id, rol_id)
+SELECT id, 'USER' FROM usuarios WHERE username = 'admin';
+
+-- USUARIO
+INSERT INTO usuarios_roles (usuario_id, rol_id)
+SELECT id, 'USER' FROM usuarios WHERE username = 'user';
