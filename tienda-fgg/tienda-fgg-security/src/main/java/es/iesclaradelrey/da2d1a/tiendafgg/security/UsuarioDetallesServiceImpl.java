@@ -5,14 +5,15 @@ import es.iesclaradelrey.da2d1a.tiendafgg.common.repositories.UsuarioRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Servicio encargado de la recuperación de usuarios para el proceso de autenticación.
+ * Servicio encargado de la recuperación de identidades para el proceso de autenticación.
  * <p>
- * Implementa la interfaz {@link UserDetailsService} de Spring Security para conectar 
- * el mecanismo de login con la persistencia en base de datos.
+ * Implementa la interfaz central de Spring Security para cargar datos de usuario
+ * personalizados, permitiendo que el framework valide las credenciales contra
+ * la base de datos de la aplicación.
  * </p>
  *
  * @author Fernando Granada
@@ -22,33 +23,31 @@ import org.springframework.transaction.annotation.Transactional;
 public class UsuarioDetallesServiceImpl implements UserDetailsService {
 
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    /**
-     * Inyecta el repositorio de usuarios para realizar las búsquedas.
-     */
-    public UsuarioDetallesServiceImpl(UsuarioRepository usuarioRepository) {
+    public UsuarioDetallesServiceImpl(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
-     * Localiza un usuario en la base de datos basándose en su nombre de usuario.
+     * Localiza al usuario en la base de datos y lo transforma en un objeto UserDetails.
      * <p>
-     * Se marca como {@code @Transactional(readOnly = true)} para asegurar que la 
-     * sesión de Hibernate permanezca abierta durante la carga de la colección de roles,
-     * evitando errores de carga diferida (LazyInitializationException).
+     * Este método es invocado internamente por el {@code AuthenticationManager}
+     * durante el flujo de login o validación de tokens.
      * </p>
      *
-     * @param username El nombre de usuario introducido en el formulario de login.
-     * @return Una instancia de {@link UsuarioDetalles} con la información del usuario.
+     * @param username El nombre de usuario introducido en el formulario/petición.
+     * @return Una instancia de {@link UsuarioDetalles} con los datos y roles del usuario.
      * @throws UsernameNotFoundException Si el usuario no existe en el sistema.
      */
     @Override
-    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        
+        System.out.println("Buscando en BD al usuario: " + username);
+
         Usuario usuario = usuarioRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
-        
+
         return new UsuarioDetalles(usuario);
     }
 }

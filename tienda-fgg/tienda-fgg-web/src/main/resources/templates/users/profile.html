@@ -1,35 +1,113 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    <link rel="stylesheet" th:href="@{/css/estilos.css}">
-    <head th:replace="~{fragments :: head_comun('Perfil')}"></head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es">
+
+    <head th:replace="~{fragments :: head_comun('Mi Perfil')}"></head>
+
     <body>
         <div th:replace="~{fragments :: menu_navegacion}"></div>
-        
-        <main class="container">
-            <div class="profile-container">
-                <div class="profile-header">
-                    <div class="profile-avatar" th:text="${#strings.substring(usuario.username, 0, 1).toUpperCase()}">U</div>
+
+        <main class="container" style="padding: 60px 0; max-width: 700px;">
+
+            <div class="login-card" style="margin-bottom: 0; border-radius: 16px 16px 0 0; padding-bottom: 24px;">
+                <div style="display: flex; align-items: center; gap: 24px;">
+
+                    <div style="
+                        width: 72px; height: 72px; border-radius: 50%;
+                        background: linear-gradient(135deg, var(--primary, #6366f1), var(--accent, #8b5cf6));
+                        display: flex; align-items: center; justify-content: center;
+                        font-size: 2rem; font-weight: 700; color: white; flex-shrink: 0;">
+                        <span th:text="${#strings.substring(usuario.username, 0, 1).toUpperCase()}">U</span>
+                    </div>
+
                     <div>
-                        <h2 th:text="${usuario.username}">Nombre de Usuario</h2>
-                        <p class="text-gray" th:text="'Miembro desde: ' + ${#temporals.format(usuario.fechaRegistro, 'dd/MM/yyyy')}"></p>
-                    </div>
-                </div>
-        
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label">Email</div>
-                        <div class="info-value" th:text="${usuario.email}">email@ejemplo.com</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Roles Asignados</div>
-                        <div class="info-value">
-                            <span class="badge-rol" th:each="rol : ${usuario.roles}" th:text="${rol.id}"></span>
+                        <h1 style="margin: 0 0 4px 0; font-size: 1.5rem;"
+                            th:text="${usuario.username}">Usuario</h1>
+                        <p style="margin: 0; color: #6b7280; font-size: 0.9rem;"
+                           th:text="'Miembro desde ' + ${#temporals.format(usuario.fechaRegistro, 'dd/MM/yyyy')}">
+                            Miembro desde —
+                        </p>
+                        <div style="margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap;">
+                            <span th:each="rol : ${usuario.roles}"
+                                  th:text="${rol.id}"
+                                  style="
+                                      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+                                      color: white; font-size: 0.7rem; font-weight: 600;
+                                      padding: 2px 10px; border-radius: 999px;
+                                      letter-spacing: 0.05em; text-transform: uppercase;">
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="login-card" style="border-radius: 0 0 16px 16px; border-top: 1px solid #e5e7eb; margin-top: 0; padding-top: 24px;">
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+
+                    <div class="form-group" style="margin: 0;">
+                        <label style="font-size: 0.75rem; text-transform: uppercase;
+                                      letter-spacing: 0.08em; color: #6b7280; font-weight: 600;">
+                            Nombre completo
+                        </label>
+                        <p style="margin: 4px 0 0 0; font-weight: 500;"
+                           th:text="${(usuario.nombre ?: '') + ' ' + (usuario.apellidos ?: '')}">—</p>
+                    </div>
+
+                    <div class="form-group" style="margin: 0;">
+                        <label style="font-size: 0.75rem; text-transform: uppercase;
+                                      letter-spacing: 0.08em; color: #6b7280; font-weight: 600;">
+                            Email
+                        </label>
+                        <p style="margin: 4px 0 0 0; font-weight: 500;"
+                           th:text="${usuario.email}">—</p>
+                    </div>
+
+                    <div class="form-group" style="margin: 0;">
+                        <label style="font-size: 0.75rem; text-transform: uppercase;
+                                      letter-spacing: 0.08em; color: #6b7280; font-weight: 600;">
+                            Teléfono
+                        </label>
+                        <p style="margin: 4px 0 0 0; font-weight: 500;"
+                           th:text="${usuario.telefono ?: 'No indicado'}">—</p>
+                    </div>
+
+                    <div class="form-group" style="margin: 0;">
+                        <label style="font-size: 0.75rem; text-transform: uppercase;
+                                      letter-spacing: 0.08em; color: #6b7280; font-weight: 600;">
+                            Fecha de nacimiento
+                        </label>
+                        <p style="margin: 4px 0 0 0; font-weight: 500;"
+                           th:text="${usuario.fechaNacimiento != null ?
+                                     #temporals.format(usuario.fechaNacimiento, 'dd/MM/yyyy') :
+                                     'No indicada'}">—</p>
+                    </div>
+
+                    <div class="form-group" style="margin: 0; grid-column: 1 / -1;">
+                        <label style="font-size: 0.75rem; text-transform: uppercase;
+                                      letter-spacing: 0.08em; color: #6b7280; font-weight: 600;">
+                            Roles asignados
+                        </label>
+                        <p style="margin: 6px 0 0 0;">
+                            <span th:each="rol, iter : ${usuario.roles}">
+                                <strong th:text="${rol.id}">ROL</strong>
+                                <span th:text="${' – ' + rol.descripcion}" style="color: #6b7280;"></span>
+                                <br th:unless="${iter.last}"/>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                    <a th:href="@{/}" class="btn-login" style="display: inline-block;">
+                        ← Volver a la tienda
+                    </a>
+                </div>
+            </div>
+
         </main>
-        
-        <div th:replace="~{fragments :: pie_pagina}"></div>
+
+        <footer th:replace="~{fragments :: pie_pagina}"></footer>
     </body>
 </html>

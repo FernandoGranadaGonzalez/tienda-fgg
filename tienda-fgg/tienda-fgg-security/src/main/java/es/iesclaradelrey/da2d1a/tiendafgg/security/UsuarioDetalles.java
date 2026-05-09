@@ -9,10 +9,11 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 /**
- * Adaptador para integrar la entidad Usuario con Spring Security.
+ * Adaptador para integrar la entidad Usuario con el ecosistema de Spring Security.
  * <p>
- * Implementa {@link UserDetails} para proporcionar la información de 
- * autenticación y autorización necesaria al framework de seguridad.
+ * Transforma los roles de la base de datos en GrantedAuthorities y proporciona
+ * métodos adicionales para facilitar el acceso a la información del perfil
+ * desde la capa de presentación.
  * </p>
  *
  * @author Fernando Granada
@@ -22,23 +23,24 @@ public class UsuarioDetalles implements UserDetails {
 
     private final Usuario usuario;
 
-    /**
-     * Envuelve una instancia de la entidad Usuario.
-     *
-     * @param usuario La entidad de base de datos.
-     */
     public UsuarioDetalles(Usuario usuario) {
         this.usuario = usuario;
     }
 
     /**
-     * Transforma los roles de la entidad en autoridades de Spring Security.
+     * Expone la entidad original.
+     * Útil para recuperar el ID o el Email en controladores mediante @AuthenticationPrincipal.
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * Mapea los roles de la entidad al formato estándar de Spring Security.
      * <p>
-     * Se añade el prefijo "ROLE_" a cada identificador de rol, siguiendo
-     * la convención estándar para el uso de {@code hasRole()} en las vistas y controladores.
+     * Se añade el prefijo "ROLE_" para ser compatible con anotaciones como
+     * {@code @PreAuthorize("hasRole('ADMIN')")}.
      * </p>
-     *
-     * @return Colección de autoridades otorgadas.
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -47,42 +49,18 @@ public class UsuarioDetalles implements UserDetails {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public String getPassword() {
-        return usuario.getPassword();
-    }
+    @Override public String getPassword()  { return usuario.getPassword(); }
+    @Override public String getUsername()  { return usuario.getUsername(); }
 
-    @Override
-    public String getUsername() {
-        return usuario.getUsername();
-    }
-    
-    @Override public boolean isAccountNonExpired() { return true; }
-    @Override public boolean isAccountNonLocked() { return true; }
-    @Override public boolean isCredentialsNonExpired() { return true; }
+    @Override public boolean isAccountNonExpired()    { return true; }
+    @Override public boolean isAccountNonLocked()     { return true; }
+    @Override public boolean isCredentialsNonExpired(){ return true; }
 
-    /**
-     * Indica si el usuario está habilitado basándose en el campo de la base de datos.
-     */
-    @Override
-    public boolean isEnabled() {
-        return usuario.isEnabled();
-    }
+    /** Vincula el estado de habilitación con el campo 'enabled' de la BD. */
+    @Override public boolean isEnabled()   { return usuario.isEnabled(); }
 
-    /**
-     * Helper para obtener el nombre legible del usuario en la interfaz.
-     *
-     * @return Nombre completo o el nombre de usuario si el nombre es nulo.
-     */
+    /** Método de conveniencia para mostrar el nombre en la UI/Frontend. */
     public String getNombreCompleto() {
-        if (usuario.getNombre() == null) return usuario.getUsername();
-        return usuario.getNombre() + " " + (usuario.getApellidos() != null ? usuario.getApellidos() : "");
-    }
-
-    /**
-     * Facilita el acceso al ID de la entidad para operaciones de perfil y rutas dinámicas.
-     */
-    public Long getId() {
-        return usuario.getId();
+        return usuario.getNombre() + " " + usuario.getApellidos();
     }
 }

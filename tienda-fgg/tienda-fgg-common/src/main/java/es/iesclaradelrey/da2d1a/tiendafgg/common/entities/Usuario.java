@@ -8,96 +8,63 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Entidad que representa a los usuarios del sistema.
+ * Entidad principal de usuario para la gestión de acceso y perfil.
  * <p>
- * Almacena tanto la información de autenticación (credenciales) como los datos 
- * de perfil del usuario. Se vincula con la entidad {@link Rol} para gestionar 
- * los permisos de acceso mediante una relación de muchos a muchos.
+ * Implementa la persistencia de credenciales y datos personales, vinculando
+ * al usuario con sus permisos mediante una tabla intermedia de roles.
  * </p>
- * 
+ *
  * @author Fernando Granada
  * @version 1.0
  */
 @Entity
 @Table(name = "usuarios")
-@Getter 
-@Setter
-@NoArgsConstructor 
-@AllArgsConstructor
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
 @Builder
 public class Usuario {
 
-    /**
-     * Identificador único autoincremental del usuario.
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * Nombre de usuario único para el inicio de sesión.
-     */
+    /** Identificador único para el inicio de sesión. */
     @Column(unique = true, nullable = false)
     private String username;
 
-    /**
-     * Contraseña cifrada del usuario.
-     * Se define una longitud de 100 para dar soporte a algoritmos de hashing como BCrypt.
-     */
+    /** Hash de la contraseña (BCrypt). Nunca debe almacenarse en texto plano. */
     @Column(nullable = false, length = 100)
     private String password;
 
-    /**
-     * Nombre de pila del usuario.
-     */
     @Column(nullable = true)
     private String nombre;
 
-    /**
-     * Apellidos del usuario.
-     */
     @Column(nullable = true)
     private String apellidos;
 
-    /**
-     * Dirección de correo electrónico única y obligatoria.
-     */
     @Column(unique = true, nullable = false)
     private String email;
 
-    /**
-     * Número de teléfono de contacto.
-     */
     private String telefono;
-
-    /**
-     * Fecha de nacimiento para validaciones de edad o perfil.
-     */
     private LocalDate fechaNacimiento;
 
-    /**
-     * Fecha y hora en la que el usuario se registró en la plataforma.
-     */
+    /** Fecha y hora exacta de la creación de la cuenta. */
     @Column(nullable = false)
     private LocalDateTime fechaRegistro;
 
-    /**
-     * Estado de la cuenta (activa o desactivada).
-     * Utilizado por Spring Security para permitir o denegar el acceso.
-     */
+    /** Indica si la cuenta está activa o ha sido suspendida. */
     private boolean enabled;
 
     /**
-     * Conjunto de roles asignados al usuario.
+     * Colección de privilegios asignados.
      * <p>
-     * Se utiliza {@code FetchType.EAGER} para cargar los permisos inmediatamente 
-     * junto al usuario, facilitando la comprobación de autoridades en seguridad.
-     * La relación se gestiona mediante la tabla intermedia {@code usuarios_roles}.
+     * Se utiliza FetchType.EAGER para asegurar que los roles estén disponibles
+     * inmediatamente durante el proceso de autenticación de Spring Security.
      * </p>
      */
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "usuarios_roles",
+            name = "usuario_rol",
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "rol_id")
     )
@@ -105,8 +72,8 @@ public class Usuario {
     private Set<Rol> roles = new HashSet<>();
 
     /**
-     * Método de ciclo de vida que asegura la asignación de la fecha de registro
-     * en el momento de la creación, si no ha sido establecida previamente.
+     * Hook de persistencia que automatiza la fecha de registro
+     * en el momento de la inserción.
      */
     @PrePersist
     protected void onCreate() {

@@ -3,11 +3,11 @@ package es.iesclaradelrey.da2d1a.tiendafgg.security;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Clase de configuración principal para el módulo de seguridad.
+ * Punto de entrada de configuración para el módulo de seguridad.
  * <p>
- * Sirve como punto de entrada para la configuración de seguridad de la aplicación.
- * Actualmente actúa como un marcador para que Spring identifique este paquete 
- * dentro del contexto de configuración global.
+ * Esta clase sirve como base para agrupar y organizar las configuraciones
+ * específicas del ámbito de seguridad, facilitando la detección de Beans
+ * y la modularidad del sistema.
  * </p>
  *
  * @author Fernando Granada

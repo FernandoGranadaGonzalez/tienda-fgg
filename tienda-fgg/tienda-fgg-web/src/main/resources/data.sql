@@ -146,24 +146,24 @@ INSERT INTO videojuego_categoria
     (videojuego_id, categoria_id) VALUES
         (33, 6);
 
--- ROLES OBLIGATORIOS
-INSERT INTO roles (id, descripcion) VALUES ('USER', 'Usuario normal');
-INSERT INTO roles (id, descripcion) VALUES ('ADMIN', 'Administrador');
-
--- USUARIOS INICIALES
-INSERT INTO usuarios (username, password, email, nombre, apellidos, enabled, fecha_registro)
-VALUES ('admin', '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.7u41W3u', 'admin@tienda.com', 'Admin', 'Sistema', true, NOW());
-
-INSERT INTO usuarios (username, password, email, nombre, apellidos, enabled, fecha_registro)
-VALUES ('user', '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.7u41W3u', 'user@tienda.com', 'Usuario', 'Normal', true, NOW());
-
 -- ROLES
-INSERT INTO usuarios_roles (usuario_id, rol_id)
-SELECT id, 'ADMIN' FROM usuarios WHERE username = 'admin';
+INSERT INTO roles (id, descripcion) VALUES
+                                        ('USER',  'Usuario normal'),
+                                        ('ADMIN', 'Administrador');
 
-INSERT INTO usuarios_roles (usuario_id, rol_id)
-SELECT id, 'USER' FROM usuarios WHERE username = 'admin';
+-- USUARIOS
+INSERT INTO usuarios (username, password, nombre, apellidos, email, fecha_registro, enabled)
+VALUES
+    ('admin', '$2a$12$r410AVHq9nZwltwTV0dMt.QKifJKtayuuvZUu41pUJYj4izDsESr6',
+     'Admin', 'Tienda', 'admin@tienda.com', NOW(), true),
+    ('user',  '$2b$12$c5kXjyyD4a.ZK/OtvMhipuwmDRBmdYHAyWGpQYWEAAqFG5IRSKtoK',
+     'User',  'Normal', 'user@tienda.com',  NOW(), true);
 
--- USUARIO
-INSERT INTO usuarios_roles (usuario_id, rol_id)
-SELECT id, 'USER' FROM usuarios WHERE username = 'user';
+-- ASIGNACIÓN DE ROLES
+INSERT INTO usuario_rol (usuario_id, rol_id) VALUES (1, 'USER'), (1, 'ADMIN');
+
+INSERT INTO usuario_rol (usuario_id, rol_id) VALUES (2, 'USER');
+
+UPDATE videojuegos SET stock = 10;
+
+UPDATE videojuegos SET stock = 0 WHERE id = 32;

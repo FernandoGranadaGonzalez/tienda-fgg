@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </section>
-        
+
             <section class="search-stats container">
                 <div class="search-box-large">
                     <h2>¿Qué quieres jugar hoy?</h2>
@@ -29,7 +29,7 @@
                         <button type="submit">Buscar</button>
                     </form>
                 </div>
-        
+
                 <div class="stats-grid">
                     <div class="stat-item">
                         <span class="stat-icon">⚡</span>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </section>
-        
+
             <section class="categories-preview container">
                 <div class="section-header">
                     <div>
@@ -57,7 +57,7 @@
                     </div>
                     <a th:href="@{/categorias}" class="explore-link">Ver todas ➔</a>
                 </div>
-        
+
                 <div class="category-cards">
                     <div class="cat-card" th:each="cat : ${categoriasPreview}">
                         <img th:src="${cat.imagen != null}

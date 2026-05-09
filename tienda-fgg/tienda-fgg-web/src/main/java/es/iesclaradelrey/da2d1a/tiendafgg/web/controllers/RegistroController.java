@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Controlador para la gestión del proceso de registro de nuevos usuarios.
+ * Controlador para la creación de nuevas cuentas de usuario.
  * <p>
- * Maneja la visualización del formulario y el procesamiento de los datos 
- * enviados, integrando validación de campos y captura de excepciones de negocio.
+ * Gestiona el ciclo de vida del alta de usuarios, desde la presentación del
+ * formulario hasta la validación de datos y persistencia final a través
+ * del servicio de usuarios.
  * </p>
  *
  * @author Fernando Granada
@@ -27,18 +28,13 @@ public class RegistroController {
 
     private final UsuarioService usuarioService;
 
-    /**
-     * Inyección del servicio de usuarios.
-     */
     public RegistroController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
 
     /**
-     * Prepara y muestra el formulario de registro.
-     *
-     * @param model Modelo para pasar un DTO vacío a la vista.
-     * @return El nombre de la plantilla "registro".
+     * Prepara el modelo con un DTO vacío para el formulario.
+     * @return Vista 'registro'.
      */
     @GetMapping
     public String mostrarFormularioRegistro(Model model) {
@@ -47,27 +43,28 @@ public class RegistroController {
     }
 
     /**
-     * Procesa el envío del formulario de registro.
+     * Procesa la solicitud de alta de usuario.
+     * <p>
+     * Valida los requisitos de entrada y delega la lógica de negocio al servicio.
+     * Si el registro es exitoso, redirige al login con un parámetro de éxito.
+     * </p>
      *
-     * @param registroDto Objeto con los datos del formulario.
-     * @param bindingResult Resultado de la validación de Bean Validation.
-     * @param model Modelo para gestionar mensajes de error.
-     * @return Redirección al login si tiene éxito, o vuelta al formulario si hay errores.
+     * @param registroDto Datos del nuevo usuario validados.
+     * @param bindingResult Resultado de la validación.
+     * @return Redirección a login o vuelta al formulario con errores.
      */
     @PostMapping
     public String registrarUsuario(@Valid @ModelAttribute("usuario") UsuarioRegistroDto registroDto,
                                    BindingResult bindingResult,
                                    Model model) {
-        
+
         if (bindingResult.hasErrors()) {
             return "registro";
         }
 
         try {
             usuarioService.registrar(registroDto);
-            
             return "redirect:/login?registrado";
-
         } catch (Exception e) {
             model.addAttribute("errorRegistro", "Error al crear el usuario: " + e.getMessage());
             return "registro";

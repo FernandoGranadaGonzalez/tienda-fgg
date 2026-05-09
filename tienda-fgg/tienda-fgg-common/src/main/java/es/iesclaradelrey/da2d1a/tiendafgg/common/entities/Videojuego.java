@@ -107,4 +107,12 @@ public class Videojuego {
     @Builder.Default
     @Column(length = 500)
     private String imagen = "no-image.jpg";
+
+    /**
+     * Stock disponible del producto. Valor por defecto 10 a nivel de BD,
+     * para que los INSERT existentes en data.sql no requieran cambios.
+     */
+    @Column(nullable = false, columnDefinition = "integer default 10")
+    @Builder.Default
+    private Integer stock = 10;
 }

@@ -6,14 +6,14 @@
     </head>
     <body>
         <div th:replace="~{fragments :: menu_navegacion}"></div>
-        
+
         <main class="container section-spacing">
             <header class="page-header">
                 <span class="badge-alt">GÉNEROS</span>
                 <h1>Categorías</h1>
                 <p class="subtitle">Elige tu género favorito y descubre los mejores títulos disponibles.</p>
             </header>
-        
+
             <div class="categories-list-grid">
                 <div class="category-item-card" th:each="category : ${categorias}">
                     <div class="cat-item-img">
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </main>
-        
+
         <footer th:replace="~{fragments :: pie_pagina}"></footer>
     </body>
 </html>

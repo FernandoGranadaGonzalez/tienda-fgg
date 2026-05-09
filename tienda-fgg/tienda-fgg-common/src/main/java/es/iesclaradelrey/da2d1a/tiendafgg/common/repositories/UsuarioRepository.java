@@ -5,49 +5,41 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 /**
- * Repositorio para la entidad {@link Usuario}.
+ * Repositorio de persistencia para la gestión de usuarios.
  * <p>
- * Define las operaciones de acceso a datos necesarias para la autenticación 
- * y gestión de cuentas de usuario. Incluye métodos de búsqueda por credenciales 
- * y comprobaciones de existencia para procesos de registro.
+ * Proporciona métodos de búsqueda unívoca esenciales para los procesos de:
+ * <ul>
+ *     <li>Autenticación (carga por username).</li>
+ *     <li>Recuperación de cuenta (carga por email).</li>
+ *     <li>Validación de registro (comprobación de duplicados).</li>
+ * </ul>
  * </p>
- * 
+ *
  * @author Fernando Granada
  * @version 1.0
  */
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     /**
-     * Busca un usuario por su nombre de usuario.
-     * Utilizado principalmente por el servicio de autenticación de Spring Security.
-     * 
-     * @param username El nombre de usuario a buscar.
-     * @return Un {@link Optional} que contiene el usuario si se encuentra, o vacío si no.
+     * Recupera un usuario por su nombre de cuenta.
+     * Fundamental para la integración con el UserDetailsService de Spring Security.
      */
     Optional<Usuario> findByUsername(String username);
 
     /**
-     * Busca un usuario por su dirección de correo electrónico.
-     * Útil para procesos de recuperación de contraseña o login alternativo.
-     * 
-     * @param email El correo electrónico a buscar.
-     * @return Un {@link Optional} que contiene el usuario si se encuentra.
+     * Localiza un usuario por su dirección de correo electrónico.
      */
     Optional<Usuario> findByEmail(String email);
 
     /**
-     * Comprueba si ya existe un usuario registrado con el nombre de usuario indicado.
-     * 
-     * @param username Nombre de usuario a verificar.
-     * @return {@code true} si ya existe, {@code false} en caso contrario.
+     * Verifica si un nombre de usuario ya está en uso.
+     * Se utiliza en la capa de servicio antes de procesar un nuevo registro.
      */
     boolean existsByUsername(String username);
 
     /**
-     * Comprueba si ya existe un usuario registrado con el correo indicado.
-     * 
-     * @param email Correo electrónico a verificar.
-     * @return {@code true} si el email ya está en uso.
+     * Verifica si un email ya está registrado.
+     * Ayuda a prevenir la creación de cuentas duplicadas con el mismo correo.
      */
     boolean existsByEmail(String email);
 }

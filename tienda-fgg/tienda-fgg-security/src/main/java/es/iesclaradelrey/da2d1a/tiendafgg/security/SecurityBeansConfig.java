@@ -6,10 +6,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * Configuración de los componentes (Beans) relacionados con la seguridad.
+ * Configuración de componentes de infraestructura de seguridad.
  * <p>
- * Centraliza la definición de algoritmos de cifrado y otros componentes 
- * compartidos por la infraestructura de seguridad de la aplicación.
+ * Define los Beans necesarios para el tratamiento de datos sensibles,
+ * asegurando que las contraseñas nunca se procesen ni almacenen en texto plano.
  * </p>
  *
  * @author Fernando Granada
@@ -19,14 +19,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityBeansConfig {
 
     /**
-     * Define el algoritmo de hashing para las contraseñas.
+     * Define el algoritmo de hashing para las contraseñas del sistema.
      * <p>
-     * Se utiliza {@link BCryptPasswordEncoder}, que es el estándar de la industria.
-     * Implementa un sistema de "sal" (salt) automático para protegerse contra
-     * ataques de tablas arcoíris (rainbow tables).
+     * Se utiliza BCrypt, un algoritmo que incorpora 'salt' de forma nativa
+     * y permite ajustar el coste computacional. Un factor de 12 ofrece una
+     * excelente resistencia ante ataques de diccionarios y computación paralela.
      * </p>
      *
-     * @return Una instancia de BCryptPasswordEncoder con fuerza de hash 12.
+     * @return Implementación de BCryptPasswordEncoder con fuerza 12.
      */
     @Bean
     public PasswordEncoder passwordEncoder() {

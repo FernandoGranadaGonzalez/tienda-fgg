@@ -1,8 +1,8 @@
 package es.iesclaradelrey.da2d1a.tiendafgg.web.config;
 
+import es.iesclaradelrey.da2d1a.tiendafgg.security.audit.AuditLogoutHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -10,65 +10,56 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
 
 /**
- * Configuración central de la seguridad de la aplicación.
+ * Configuración maestra de seguridad perimetral.
  * <p>
- * Define las reglas de acceso a las rutas (URL), la configuración del formulario
- * de inicio de sesión personalizado, la gestión de logout y la seguridad 
- * de la base de datos H2 integrada.
+ * Define la cadena de filtros (SecurityFilterChain) que protege los recursos
+ * de la TiendaFGG, gestionando el ciclo de vida de la sesión, la política
+ * de acceso por roles y la integración de la auditoría.
  * </p>
  *
  * @author Fernando Granada
- * @version 1.0
+ * @version 1.1
  */
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
 public class SecurityConfig {
 
-    /**
-     * Dialecto para integrar Spring Security con Thymeleaf.
-     * Permite usar atributos como sec:authorize en las plantillas HTML.
-     */
+    /** Handler de auditoría: se registra en el proceso de logout. */
+    private final AuditLogoutHandler auditLogoutHandler;
+
+    public SecurityConfig(AuditLogoutHandler auditLogoutHandler) {
+        this.auditLogoutHandler = auditLogoutHandler;
+    }
+
     @Bean
     public SpringSecurityDialect springSecurityDialect() {
         return new SpringSecurityDialect();
     }
 
-    /**
-     * Define la cadena de filtros de seguridad que interceptarán las peticiones HTTP.
-     *
-     * @param http Configuración de seguridad HTTP.
-     * @return El filtro de seguridad configurado.
-     * @throws Exception Si ocurre un error durante la configuración.
-     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/js/**", "/imagenes/**", "/favicon.ico").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/imagenes/**", "/about-us.html").permitAll()
                         .requestMatchers("/login", "/error", "/acceso-denegado").permitAll()
-                        
                         .requestMatchers("/register").anonymous()
-                        
                         .requestMatchers("/", "/index", "/sobre-nosotros", "/condiciones").permitAll()
-                        .requestMatchers("/productos/**", "/categorias/**").permitAll()
-                        
+                        .requestMatchers("/productos", "/productos/**").permitAll()
+                        .requestMatchers("/categorias", "/categorias/**").permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
-                        
-                        .requestMatchers("/users/profile/**").authenticated()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-
+                        .requestMatchers("/users/profile", "/users/profile/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/", true)
-                        .failureUrl("/login?error")
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .addLogoutHandler(auditLogoutHandler)
                         .logoutSuccessUrl("/")
                         .deleteCookies("JSESSIONID")
                         .invalidateHttpSession(true)

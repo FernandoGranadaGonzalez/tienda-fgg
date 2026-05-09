@@ -27,6 +27,7 @@
         <module>tienda-fgg-common</module>
         <module>tienda-fgg-web</module>
         <module>tienda-fgg-security</module>
+        <module>tienda-fgg-api</module>
     </modules>
 
     <dependencies>

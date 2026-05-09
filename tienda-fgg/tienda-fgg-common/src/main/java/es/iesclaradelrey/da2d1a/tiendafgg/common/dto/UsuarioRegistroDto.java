@@ -7,11 +7,10 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 /**
- * Objeto de Transferencia de Datos (DTO) para el proceso de registro de nuevos usuarios.
+ * Objeto de Transferencia de Datos (DTO) para el registro de nuevos usuarios.
  * <p>
- * Esta clase se encarga de transportar la información desde el formulario de registro
- * hacia el controlador, aplicando reglas de validación básicas mediante anotaciones 
- * de Jakarta Validation para garantizar la integridad de los datos de entrada.
+ * Define las reglas de validación de entrada para garantizar la integridad
+ * de la base de datos de usuarios y el cumplimiento de las políticas de seguridad.
  * </p>
  *
  * @author Fernando Granada
@@ -20,43 +19,30 @@ import lombok.Data;
 @Data
 public class UsuarioRegistroDto {
 
-    /**
-     * Nombre de identificación del usuario en la plataforma.
-     * Debe ser único y cumplir con una longitud de entre 4 y 20 caracteres.
-     */
+    /** Nombre de identificación único en el sistema. */
     @NotBlank(message = "El nombre de usuario es obligatorio")
     @Size(min = 4, max = 20, message = "El usuario debe tener entre 4 y 20 caracteres")
     private String username;
 
     /**
-     * Contraseña de acceso. 
-     * Se requiere una longitud mínima de 6 caracteres por seguridad.
+     * Contraseña en texto plano (será encriptada por BCrypt en el servicio).
+     * Se exige un mínimo de seguridad de 6 caracteres.
      */
     @NotBlank(message = "La contraseña es obligatoria")
     @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
     private String password;
 
-    /**
-     * Dirección de correo electrónico del usuario.
-     * Se valida que cumpla con el formato estándar de email.
-     */
+    /** Correo electrónico de contacto y recuperación. */
     @NotBlank(message = "El email es obligatorio")
     @Email(message = "Debe ser un email válido")
     private String email;
 
-    /**
-     * Nombre real del usuario (opcional).
-     */
     private String nombre;
-
-    /**
-     * Apellidos del usuario (opcional).
-     */
     private String apellidos;
 
     /**
-     * Flag que indica si el usuario ha aceptado los términos y condiciones.
-     * Es obligatorio que sea {@code true} para permitir el registro.
+     * Validación lógica para el cumplimiento legal (RGPD).
+     * El registro fallará si este campo no es true.
      */
     @AssertTrue(message = "Debes aceptar las condiciones para registrarte")
     private boolean aceptoCondiciones;

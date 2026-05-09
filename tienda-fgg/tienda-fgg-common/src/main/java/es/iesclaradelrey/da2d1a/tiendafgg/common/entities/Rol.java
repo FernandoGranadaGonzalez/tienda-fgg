@@ -4,11 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * Entidad que representa los roles o perfiles de autoridad dentro del sistema.
+ * Entidad que define los niveles de autoridad o perfiles de acceso en el sistema.
  * <p>
- * Los roles definen los permisos que tiene un usuario (ej: ADMIN, USER, EDITOR).
- * Se utiliza una cadena de texto corta como identificador para facilitar la
- * integración con los esquemas de seguridad de Spring Security.
+ * Se utiliza una clave primaria natural (String) para facilitar la lectura de
+ * la base de datos y la integración con las GrantedAuthorities de Spring Security.
  * </p>
  *
  * @author Fernando Granada
@@ -16,30 +15,21 @@ import lombok.*;
  */
 @Entity
 @Table(name = "roles")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
 public class Rol {
 
     /**
-     * Identificador único del rol.
-     * <p>
-     * Se recomienda usar códigos cortos en mayúsculas (ej: 'ADMIN', 'USER').
-     * Tiene una longitud máxima de 6 caracteres según la definición de la columna.
-     * </p>
+     * Identificador único del rol (ej: "USER", "ADMIN").
+     * Máximo de 6 caracteres para optimizar el almacenamiento y los índices.
      */
     @Id
     @Column(length = 6)
     private String id;
 
     /**
-     * Descripción detallada de las funciones o permisos asociados al rol.
-     * <p>
-     * Ejemplo: "Administrador con acceso total", "Usuario final registrado".
-     * </p>
+     * Explicación detallada de los permisos asociados al rol.
      */
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String descripcion;
 }

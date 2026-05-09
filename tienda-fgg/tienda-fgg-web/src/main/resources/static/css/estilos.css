@@ -813,7 +813,6 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    /*border-bottom: 1px solid #1a1a1a;*/
 }
 
 .admin-content {
@@ -824,15 +823,6 @@ body {
     align-items: center;
     gap: 20px;
 }
-
-/*
-.admin-label {
-    color: #667C89;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-family: sans-serif;
-}*/
 
 .admin-link {
     color: #0da68e;
@@ -964,63 +954,4 @@ body {
     color: #a0aec0 !important;
     font-weight: normal !important;
     font-size: 0.85rem;
-}
-
-.profile-container {
-    max-width: 800px;
-    margin: 50px auto;
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
-.profile-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    border-bottom: 2px solid #f0f2f5;
-    padding-bottom: 20px;
-    margin-bottom: 30px;
-}
-.profile-avatar {
-    width: 80px;
-    height: 80px;
-    background: var(--primary);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    font-weight: bold;
-}
-.info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-.info-item {
-    padding: 15px;
-    background: #f8fafc;
-    border-radius: 12px;
-}
-.info-label {
-    font-size: 0.8rem;
-    color: #64748b;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin-bottom: 5px;
-}
-.info-value {
-    font-size: 1.1rem;
-    color: #1e293b;
-    font-weight: 600;
-}
-.badge-rol {
-    display: inline-block;
-    padding: 4px 12px;
-    background: #e2e8f0;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    margin-right: 5px;
 }

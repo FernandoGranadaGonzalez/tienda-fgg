@@ -1,15 +1,16 @@
 package es.iesclaradelrey.da2d1a.tiendafgg.common.repositories;
 
 import es.iesclaradelrey.da2d1a.tiendafgg.common.entities.Videojuego;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Repositorio para la gestión de persistencia de la entidad {@link Videojuego}.
+ * Repositorio para la gestión de persistencia de la entidad Videojuego.
  * <p>
- * Proporciona métodos para realizar consultas avanzadas sobre el catálogo de juegos,
- * incluyendo filtros por categorías y búsquedas textuales por título.
+ * Implementa capacidades de filtrado dinámico y búsqueda textual. Al extender
+ * JpaRepository, hereda automáticamente operaciones de paginación y ordenación.
  * </p>
  *
  * @author Fernando Granada
@@ -19,28 +20,39 @@ import java.util.List;
 public interface VideojuegoRepository extends JpaRepository<Videojuego, Long> {
 
     /**
-     * Recupera una lista de videojuegos que pertenecen a una categoría específica.
+     * Filtra el catálogo por identificador de categoría.
      * <p>
-     * Este método realiza un "join" implícito con la tabla de categorías.
-     * El uso del guion bajo ({@code _}) en el nombre del método ayuda a Spring
-     * a interpretar que debe navegar desde la entidad {@code Videojuego}
-     * hacia la propiedad {@code id} de su lista de {@code categorias}.
+     * Utiliza la navegación de propiedades de Spring Data para realizar un join
+     * con la tabla intermedia de categorías.
      * </p>
      *
-     * @param categoriaId Identificador único de la categoría.
-     * @return Lista de videojuegos asociados a dicha categoría.
+     * @param categoriaId ID de la categoría (ej: 1 para "RPG").
+     * @return Colección de videojuegos pertenecientes a la categoría.
      */
     List<Videojuego> findByCategorias_Id(Long categoriaId);
 
     /**
-     * Realiza una búsqueda de videojuegos cuyo título contenga una cadena de texto.
+     * Buscador textual para el catálogo.
      * <p>
-     * La búsqueda es insensible a mayúsculas y minúsculas ({@code IgnoreCase})
-     * y busca coincidencias parciales en cualquier posición del título ({@code Containing}).
+     * Implementa una búsqueda flexible mediante el operador SQL 'LIKE %query%'
+     * ignorando la distinción entre mayúsculas y minúsculas.
      * </p>
      *
-     * @param query Cadena de texto a buscar en los títulos.
-     * @return Lista de videojuegos que cumplen con el criterio de búsqueda.
+     * @param query Término de búsqueda proporcionado por el usuario.
+     * @return Lista de coincidencias encontradas en el título.
      */
     List<Videojuego> findByTituloContainingIgnoreCase(String query);
+
+    /**
+     * Recupera videojuegos por categoría permitiendo ordenación dinámica.
+     * <p>
+     * Ideal para funcionalidades como "Ordenar por precio ascendente/descendente"
+     * dentro de una categoría específica.
+     * </p>
+     *
+     * @param categoryId ID de la categoría.
+     * @param sort Parámetros de ordenación (campo y dirección).
+     * @return Lista ordenada de videojuegos.
+     */
+    List<Videojuego> findByCategoriasId(Long categoryId, Sort sort);
 }

@@ -2,49 +2,54 @@ package es.iesclaradelrey.da2d1a.tiendafgg.common.services;
 
 import es.iesclaradelrey.da2d1a.tiendafgg.common.entities.Usuario;
 import es.iesclaradelrey.da2d1a.tiendafgg.common.dto.UsuarioRegistroDto;
+
 import java.util.Optional;
 
 /**
- * Interfaz que define los servicios de gestión de usuarios en la plataforma.
+ * Interfaz de servicio para la gestión de usuarios y seguridad.
  * <p>
- * Expone las operaciones necesarias para la autenticación, la recuperación 
- * de perfiles y el proceso de alta de nuevos clientes.
+ * Define las operaciones necesarias para localizar usuarios en los procesos
+ * de autenticación y para la creación de nuevas cuentas en el sistema.
  * </p>
- * 
+ *
  * @author Fernando Granada
  * @version 1.0
  */
 public interface UsuarioService {
 
     /**
-     * Localiza un usuario basado en su nombre de acceso.
+     * Recupera un usuario por su nombre de cuenta único.
      * <p>
-     * Es el método principal utilizado por el motor de seguridad para 
-     * verificar la identidad durante el login.
+     * Utilizado principalmente por el motor de seguridad para cargar
+     * los detalles del usuario durante el login o la validación de tokens.
      * </p>
-     * 
-     * @param username El nombre de usuario único.
-     * @return Un {@link Optional} con el usuario encontrado.
+     *
+     * @param username Nombre de usuario a buscar.
+     * @return Un {@link Optional} que contiene al usuario si existe.
      */
     Optional<Usuario> findByUsername(String username);
-    
-    /**
-     * Crea un nuevo usuario en el sistema a partir de los datos de registro.
-     * <p>
-     * Este método debe encargarse de validar la información, cifrar la 
-     * contraseña y asignar los roles iniciales necesarios.
-     * </p>
-     * 
-     * @param registroDto Objeto de transferencia con los datos del formulario.
-     * @return El {@link Usuario} creado y persistido.
-     */
-    Usuario registrar(UsuarioRegistroDto registroDto);
 
     /**
-     * Recupera la información de un usuario mediante su identificador interno.
-     * 
+     * Localiza a un usuario mediante su clave primaria.
+     *
      * @param id Identificador único numérico.
-     * @return Un {@link Optional} con el usuario correspondiente.
+     * @return Un {@link Optional} con el usuario encontrado.
      */
     Optional<Usuario> findById(Long id);
+
+    /**
+     * Orquesta el proceso de registro de un nuevo usuario en la plataforma.
+     * <p>
+     * La implementación debe encargarse de:
+     * <ul>
+     *     <li>Validar que el username/email no existan previamente.</li>
+     *     <li>Codificar la contraseña usando un PasswordEncoder.</li>
+     *     <li>Asignar los roles por defecto (habitualmente "USER").</li>
+     * </ul>
+     * </p>
+     *
+     * @param registroDto Objeto con los datos de entrada validados.
+     * @return El usuario recién creado y persistido.
+     */
+    Usuario registrar(UsuarioRegistroDto registroDto);
 }
